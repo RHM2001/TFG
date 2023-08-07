@@ -3,13 +3,15 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 
-import Index from './components/views/Index.vue';
+import Home from './components/views/Home.vue';
 import Artistas from './components/views/Artistas.vue';
+import Sincronizacion from './components/views/Sincronizacion.vue';
 
 
 const routes = [
-    { path: '/', name: 'index', component: Index },
+    { path: '/', name: 'home', component: Home },
     { path: '/artistas', name: 'artistas', component: Artistas },
+    { path: '/sincronizacion', name: 'sincronizacion', component: Sincronizacion },
 ];
 
 const router = createRouter({

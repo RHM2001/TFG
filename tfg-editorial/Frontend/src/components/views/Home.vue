@@ -12,7 +12,7 @@
          estados de ánimo y a medida.
       </h3>
    </div>
-   <div class="container mx-auto px-5 py-2 lg:px-32 lg:pt-12">
+   <div class="container mx-auto px-5 py-2 lg:px-18 lg:pt-10 ">
       <div id="carouselExampleCaptions" class="relative" data-te-carousel-init data-te-ride="carousel">
          <!--Carousel indicators-->
          <div class="absolute bottom-0 left-0 right-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0"
@@ -116,3 +116,46 @@ export default {
    }
 }
 </script>
+
+<style>
+body {
+   font-family: 'Roboto', sans-serif;
+   /* Fuente Roboto */
+}
+
+/* Estilo para el primer título */
+.text-5xl {
+   font-size: 2.5rem;
+   font-weight: bold;
+   color: white;
+   /* Color del título */
+   margin: 1.5rem 0;
+}
+
+/* Estilo para el segundo y tercer título */
+.text-3xl {
+   font-size: 1.75rem;
+   font-weight: bold;
+   color: white;
+   /* Color de los títulos */
+   margin-top: 1rem;
+}
+
+/* Estilo para el texto normal */
+.text-light {
+   font-size: 1.25rem;
+   color: white;
+   /* Color del texto normal */
+}
+
+/* Estilo para el texto en un color más neutro */
+.text-neutral-950 {
+   font-size: 1.25rem;
+   color: black;
+   /* Color del texto neutro */
+   margin-bottom: 1rem;
+}
+
+
+
+</style>

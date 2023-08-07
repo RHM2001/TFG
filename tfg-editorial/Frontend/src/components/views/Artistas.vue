@@ -3,13 +3,13 @@
         Escudería de artistas, del VUE
     </h4>
 
-    <div class="container mx-auto px-5 py-2 lg:px-32 lg:pt-12">
+    <div class="container mx-auto px-5 py-12 lg:px-32 lg:pt-12">
         <div class="-m-1 flex flex-wrap justify-center md:-m-2">
 
 
 
             <div
-                class="block max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
+                class="block-artistas max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
                 <div class="relative overflow-hidden bg-cover bg-no-repeat">
                     <img class="rounded-t-lg"
                         src="https://www.sonbuenos.com/wp-content/uploads/2023/04/arde-bogota-lowres.jpg"
@@ -23,7 +23,7 @@
             </div>
 
             <div
-                class="block max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
+                class="block-artistas max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
                 <div class="relative overflow-hidden bg-cover bg-no-repeat">
                     <img class="rounded-t-lg" src="https://www.sonbuenos.com/wp-content/uploads/2022/03/hooninesb.jpg"
                         alt="Foto Arde Bogota" />
@@ -36,7 +36,7 @@
             </div>
 
             <div
-                class="block max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
+                class="block-artistas max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
                 <div class="relative overflow-hidden bg-cover bg-no-repeat">
                     <img class="rounded-t-lg" src="https://www.sonbuenos.com/wp-content/uploads/2023/04/franvvi.jpeg"
                         alt="Foto Arde Bogota" />
@@ -49,7 +49,7 @@
             </div>
 
             <div
-                class="block max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
+                class="block-artistas max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
                 <div class="relative overflow-hidden bg-cover bg-no-repeat">
                     <img class="rounded-t-lg" src="https://www.sonbuenos.com/wp-content/uploads/2020/04/nunatakweb.jpg"
                         alt="Foto Arde Bogota" />
@@ -62,7 +62,7 @@
             </div>
 
             <div
-                class="block max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
+                class="block-artistas max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
                 <div class="relative overflow-hidden bg-cover bg-no-repeat">
                     <img class="rounded-t-lg" src="https://www.sonbuenos.com/wp-content/uploads/2023/04/04-1.jpg"
                         alt="Foto Arde Bogota" />
@@ -75,7 +75,7 @@
             </div>
 
             <div
-                class="block max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
+                class="block-artistas max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
                 <div class="relative overflow-hidden bg-cover bg-no-repeat">
                     <img class="rounded-t-lg" src="https://www.sonbuenos.com/wp-content/uploads/2023/04/Bengala-4-2.jpg"
                         alt="Foto Arde Bogota" />
@@ -88,7 +88,7 @@
             </div>
 
             <div
-                class="block max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
+                class="block-artistas max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
                 <div class="relative overflow-hidden bg-cover bg-no-repeat">
                     <img class="rounded-t-lg" src="https://www.sonbuenos.com/wp-content/uploads/2022/03/carmesiwebsb.jpg"
                         alt="Foto Arde Bogota" />
@@ -101,7 +101,7 @@
             </div>
 
             <div
-                class="block max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
+                class="block-artistas max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
                 <div class="relative overflow-hidden bg-cover bg-no-repeat">
                     <img class="rounded-t-lg"
                         src="https://www.sonbuenos.com/wp-content/uploads/2023/04/foto-sephun-lowres.jpeg"
@@ -120,25 +120,25 @@
 </template>
 
 <style>
-.block {
+.block-artistas {
     margin-bottom: 20px;
     margin-right: 20px;
     transition: transform 0.2s ease-in-out;
 
 }
 
-.block img {
+.block-artistas img {
     width: 225px;
     height: 225px;
     transition: opacity 0.2s ease-in-out;
     opacity: 0.9;
 }
 
-.block:hover {
+.block-artistas:hover {
     transform: scale(1.05);
 }
 
-.block:hover img {
+.block-artistas:hover img {
     opacity: 1;
 }
 </style>
