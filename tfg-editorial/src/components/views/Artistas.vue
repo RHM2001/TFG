@@ -142,3 +142,16 @@
     opacity: 1;
 }
 </style>
+
+<script>
+
+export default {
+
+    mounted() {
+        const script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "../node_modules/tw-elements/dist/js/tw-elements.umd.min.js";
+        document.body.appendChild(script);
+    }
+}
+</script>

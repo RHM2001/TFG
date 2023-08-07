@@ -43,7 +43,7 @@
                             <router-link to="/artistas"
                                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-pink-600  lg:p-2 [&.active]:text-black/90"
                                 data-te-nav-link-ref data-te-ripple-init data-te-ripple-color="light">
-                                Artistas & Autores
+                                Artistas
                             </router-link>
                         </li>
 
@@ -78,13 +78,15 @@
 </style>
 
 <script>
-// Initialization for ES Users
-import {
-    Collapse,
-    Dropdown,
-    initTE,
-} from "tw-elements";
+export default {
 
-initTE({ Collapse, Dropdown });
+    mounted() {
+        const script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "../node_modules/tw-elements/dist/js/tw-elements.umd.min.js";
+        document.body.appendChild(script);
+    }
+}
+
 
 </script>

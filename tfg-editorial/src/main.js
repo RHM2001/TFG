@@ -6,6 +6,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import Index from './components/views/Index.vue';
 import Artistas from './components/views/Artistas.vue';
 
+
 const routes = [
     { path: '/', name: 'index', component: Index },
     { path: '/artistas', name: 'artistas', component: Artistas },
