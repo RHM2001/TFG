@@ -1,4 +1,17 @@
 <template>
+   <div class="px-6 text-center text-white md:px-12">
+      <h1 class="m-5 text-5xl font-bold leading-tight text-light">SON BUENOS</h1>
+      <h3 class="mb-2 mt-0 text-3xl font-medium leading-tight text-light">
+         SonBuenos representa una amplia libreria de música, un catálogo con artistas con denominación de origen en la
+         Región de Murcia.
+      </h3>
+      <h3 class="mb-2 mt-0 text-3xl font-medium leading-tight text-neutral-950">
+         ¡Consultanos para conseguir
+         esa canción que necesitas!
+         De todos los géneros, sensaciones,
+         estados de ánimo y a medida.
+      </h3>
+   </div>
    <div class="container mx-auto px-5 py-2 lg:px-32 lg:pt-12">
       <div id="carouselExampleCaptions" class="relative" data-te-carousel-init data-te-ride="carousel">
          <!--Carousel indicators-->
