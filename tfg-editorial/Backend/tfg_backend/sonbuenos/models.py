@@ -23,4 +23,4 @@ class Cancion (models.Model):
     genero = models.ManyToManyField(Genero)
     duracion = models.DurationField(null=True)
     fecha = models.DateField(null=True)
-    entidad = models.OneToOneField(EntidadMusical, on_delete=models.CASCADE)
+    entidad = models.ForeignKey(EntidadMusical, on_delete=models.CASCADE)

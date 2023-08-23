@@ -6,7 +6,18 @@
                 Catálogo con filtros y búsqueda
             </h5>
 
-            <div data-te-datatable-init>
+
+            <div class="mb-3">
+                <div class="relative mb-4 flex w-full flex-wrap items-stretch">
+                    <input v-model="searchQuery" type="search"
+                        class="relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-gray-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-gray-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none"
+                        placeholder="Buscar" aria-label="Buscar" />
+
+                </div>
+            </div>
+
+
+            <div data-te-datatable-initdata-te-attributesdata-te-attributesth>
                 <table class=" min-w-full border border-gray-300 divide-y divide-gray-300">
                     <thead class="bg-gray-50">
                         <tr>
@@ -29,10 +40,10 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-300">
-                        <tr v-for="(cancion, index) in canciones" :key="index">
+                        <tr v-for="(cancion, index) in filteredCanciones" :key="index">
                             <td class="px-6 py-4 whitespace-nowrap">{{ cancion.nombre }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ cancion.entidadNombre }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ cancion.genero }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ cancion.generoNombres ? cancion.generoNombres.join(', ') : "" }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ cancion.duracion }}</td>
                         </tr>
                     </tbody>
@@ -50,9 +61,12 @@ export default {
         return {
             fields: [
                 { key: 'nombre', label: 'Nombre' },
-                { key: 'entidad', label: 'Entidad' }
+                { key: 'entidad', label: 'Entidad' },
+                { key: 'duracion', label: 'Duración' },
+                { key: 'genero', label: 'Géneros' }
             ],
-            canciones: []
+            canciones: [],
+            searchQuery: "",
         };
     },
     mounted() {
@@ -67,6 +81,7 @@ export default {
                 // Para cada canción, obtén el nombre de la entidad a través de otra solicitud
                 for (const cancion of this.canciones) {
                     await this.fetchEntidadName(cancion);
+                    await this.fetchGeneroNames(cancion);
                 }
 
                 console.log(response.data); // Mover el console.log aquí
@@ -83,9 +98,53 @@ export default {
             } catch (error) {
                 console.error('Error fetching entidad:', error);
             }
-        }
+        },
 
-    }
+        async fetchGeneroNames(cancion) {
+            try {
+                // Obtén los géneros relacionados con la canción actual
+                const generosRelacionados = [];
+
+                for (const generoId of cancion.genero) {
+                    const generoResponse = await axios.get(`http://localhost:8000/api/editorial/generos/${generoId}/`);
+                    generosRelacionados.push(generoResponse.data.nombre);
+                }
+
+                // Asigna los géneros relacionados a la propiedad generoNombres
+                cancion.generoNombres = generosRelacionados;
+            } catch (error) {
+                console.error('Error fetching géneros:', error);
+                cancion.generoNombres = []; // Asignar un arreglo vacío en caso de error
+            }
+        },
+
+
+
+        performSearch() {
+            // Filtra las canciones en función de la searchQuery
+            this.filteredCanciones = this.canciones.filter(cancion =>
+                cancion.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())
+                || cancion.entidadNombre.toLowerCase().includes(this.searchQuery.toLowerCase())
+                || (cancion.generoNombres && cancion.generoNombres.join(', ').toLowerCase().includes(this.searchQuery.toLowerCase()))
+            );
+        },
+
+    },
+    computed: {
+        // Utiliza una propiedad computada para mostrar las canciones filtradas
+        filteredCanciones() {
+            if (this.searchQuery) {
+                return this.canciones.filter(cancion =>
+                    cancion.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())
+                    || cancion.entidadNombre.toLowerCase().includes(this.searchQuery.toLowerCase())
+                    || (cancion.generoNombres && cancion.generoNombres.join(', ').toLowerCase().includes(this.searchQuery.toLowerCase()))
+                );
+            } else {
+                return this.canciones;
+            }
+        },
+    },
 };
+
 
 </script>
