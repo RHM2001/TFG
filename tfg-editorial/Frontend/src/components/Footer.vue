@@ -1,11 +1,11 @@
 <template>
-    <footer class="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left ">
+    <footer class="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left">
         <div
             class="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-neutral-500 lg:justify-between">
             <div class="mr-12 hidden lg:block">
                 <span>Contacta con nosotros en las redes sociales:</span>
             </div>
-            
+
             <div class="flex justify-center">
                 <a href="#!" class="mr-6 text-neutral-600 dark:text-neutral-200">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
@@ -55,3 +55,12 @@
         </div>
     </footer>
 </template>
+
+<style>
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+</style>
+

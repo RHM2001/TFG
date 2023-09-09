@@ -1,7 +1,7 @@
 <template>
-    <h4 class="mb-0 mt-6 text-xl font-medium leading-tight text-white text-center">
-        Escudería de artistas, del VUE
-    </h4>
+    <h1 class="mt-6 text-white text-center">
+        Escudería de artistas
+    </h1>
 
     <div class="container mx-auto px-5 py-12 lg:px-32 lg:pt-12">
         <div class="-m-1 flex flex-wrap justify-center md:-m-2">
