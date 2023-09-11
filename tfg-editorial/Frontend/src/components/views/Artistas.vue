@@ -1,12 +1,10 @@
 <template>
-    <h1 class="mt-6 text-white text-center">
+    <h1 class="font-lara mt-6 text-white text-center" style="font-size: 40px">
         Escudería de artistas
     </h1>
 
     <div class="container mx-auto px-5 py-12 lg:px-32 lg:pt-12">
         <div class="-m-1 flex flex-wrap justify-center md:-m-2">
-
-
 
             <div
                 class="block-artistas max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
@@ -114,6 +112,8 @@
                 </div>
             </div>
 
+            
+
 
         </div>
     </div>
@@ -141,6 +141,7 @@
 .block-artistas:hover img {
     opacity: 1;
 }
+
 </style>
 
 <script>

@@ -1,34 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+
 /* Animación de desvanecimiento de entrada */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Animación para el logo de SonBuenos */
-
 .animate-fade-in {
-    animation: fadeIn 1s ease-in-out;
+  animation: fadeIn 1s ease-in-out;
 }
-
 
 body {
-    padding-bottom: 8em;
-    min-height: 100vh;
+  margin: 0;
+  padding-bottom: 9em;
+  position: relative;
+  min-height: 100vh;
 
-    /* Fondo de gradiente para el cuerpo de la página */
-    background-image: radial-gradient(circle at 50% -20.71%, #ffa09b 0, #ff939d 12.5%, #ff879c 25%, #f57a97 37.5%, #d86c8f 50%, #bb5f85 62.5%, #a1557c 75%, #8a4c73 87.5%, #77456b 100%);
-    background-attachment: fixed;
-    background-size: cover;
-    background-repeat: no-repeat;
+  /* Fondo de gradiente para el cuerpo de la página */
+  background-image: radial-gradient(
+    circle at 50% -20.71%,
+    #ffa09b 0,
+    #ff939d 12.5%,
+    #ff879c 25%,
+    #f57a97 37.5%,
+    #d86c8f 50%,
+    #bb5f85 62.5%,
+    #a1557c 75%,
+    #8a4c73 87.5%,
+    #77456b 100%
+  );
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
+
+.font-lara{
+  font-family: 'Abel', sans-serif;
+}
+
 
 

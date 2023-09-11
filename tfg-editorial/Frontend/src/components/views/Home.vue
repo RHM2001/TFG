@@ -1,106 +1,51 @@
 <template>
-   <div class="px-6 text-center text-white md:px-12">
-      <h1 class="m-5 text-5xl font-bold leading-tight text-light">SON BUENOS</h1>
-      <h3 class="mb-2 mt-0 text-3xl font-medium leading-tight text-light">
-         SonBuenos representa una amplia libreria de música, un catálogo con artistas con denominación de origen en la
-         Región de Murcia.
-      </h3>
-      <h3 class="mb-2 mt-0 text-3xl font-medium leading-tight text-neutral-950">
-         ¡Consultanos para conseguir
-         esa canción que necesitas!
-         De todos los géneros, sensaciones,
-         estados de ánimo y a medida.
-      </h3>
-   </div>
-   <div class="container mx-auto px-5 py-2 lg:px-18 lg:pt-10 ">
+   <div class="carousel-container ">
       <div id="carouselExampleCaptions" class="relative" data-te-carousel-init data-te-ride="carousel">
-         <!--Carousel indicators-->
-         <div class="absolute bottom-0 left-0 right-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0"
-            data-te-carousel-indicators>
-            <button type="button" data-te-target="#carouselExampleCaptions" data-te-slide-to="0" data-te-carousel-active
-               class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-white bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none"
-               aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-te-target="#carouselExampleCaptions" data-te-slide-to="1"
-               class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-white bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none"
-               aria-label="Slide 2"></button>
-            <button type="button" data-te-target="#carouselExampleCaptions" data-te-slide-to="2"
-               class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-white bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none"
-               aria-label="Slide 3"></button>
-         </div>
+
 
          <!--Carousel items-->
          <div class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
             <!--First item-->
             <div
-               class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+               class="relative float-left -mr-[100%] w-full transition-transform duration-[800ms] ease-in-out motion-reduce:transition-none"
                data-te-carousel-active data-te-carousel-item style="backface-visibility: hidden">
                <img src="https://www.sonbuenos.com/wp-content/uploads/2023/06/PORTADA-EP-HOONINE.jpg"
-                  class="block w-full object-cover h-[400px]" alt="..." />
-               <div class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
-                  <h5 class="text-xl">Nuevo single de HOONINE</h5>
-                  <p>
-                     HOONINE presenta “Con todo y con eso”, una canción de pop minimalista, producida por la propia Carmen
-                     Alarcón.
-                  </p>
-               </div>
+                  class="block w-full object-cover h-[1000px]" alt="..." />
+
             </div>
             <!--Second item-->
             <div
-               class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+               class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[800ms] ease-in-out motion-reduce:transition-none"
                data-te-carousel-item style="backface-visibility: hidden">
-               <img src="https://www.sonbuenos.com/wp-content/uploads/2023/06/CLAIM.jpg"
-                  class="block w-full object-cover h-[400px]" alt="..." />
-               <div class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
-                  <h5 class="text-xl">BENGALA</h5>
-                  <p>
-                     CLAIM PRESENTA EL SEGUNDO ADELANTO DE SU TERCER TRABAJO
-                  </p>
-               </div>
+               <img src="https://www.somosclaim.com/wp-content/uploads/2021/06/IMG_9707-Editar-2-1.jpg"
+                  class="block w-full object-cover h-[1000px]" alt="..." />
+
             </div>
             <!--Third item-->
             <div
-               class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+               class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[800ms] ease-in-out motion-reduce:transition-none"
                data-te-carousel-item style="backface-visibility: hidden">
-               <img
-                  src="https://es.rollingstone.com/wp-content/uploads/2023/03/Arde-Bogota-presenta-Cowboys-de-la-A3-1024x616.jpg"
-                  class="block w-full object-cover h-[400px]" alt="..." />
-               <div class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
-                  <h5 class="text-xl">ARDE BOGOTÁ: DIRECTOS AL #3</h5>
-                  <p>
-                     Arde Bogotá, la banda rock por excelencia en España
-                     Arde Bogotá se consagra como la banda rock del momento
-                  </p>
-               </div>
+               <img src="https://s1.lanzadigital.com/wp-content/uploads/2022/05/Arde_Bogota_Zahora_Magestic_CD_4.jpg"
+                  class="block w-full object-cover h-[1000px]" alt="..." />
+
             </div>
          </div>
 
-         <!--Carousel controls - prev item-->
-         <button
-            class="absolute bottom-0 left-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
-            type="button" data-te-target="#carouselExampleCaptions" data-te-slide="prev">
-            <span class="inline-block h-8 w-8">
-               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                  stroke="currentColor" class="h-6 w-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-               </svg>
-            </span>
-            <span
-               class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Previous</span>
-         </button>
-         <!--Carousel controls - next item-->
-         <button
-            class="absolute bottom-0 right-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
-            type="button" data-te-target="#carouselExampleCaptions" data-te-slide="next">
-            <span class="inline-block h-8 w-8">
-               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                  stroke="currentColor" class="h-6 w-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-               </svg>
-            </span>
-            <span
-               class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Next</span>
-         </button>
+
       </div>
+   </div>
+
+   <div class="text-overlay fade-in">
+      <p class="font-lara" style="font-size: 40px; color: white;">Representamos una amplia librería
+         de música, un catálogo con artistas con denominación de origen en la
+         Región de Murcia.</p>
+
+      <p class="font-lara mt-8" style="font-size: 40px; color: white;">
+         ¡Consultanos para conseguir
+         esa canción que necesitas!
+         De todos los géneros, sensaciones,
+         estados de ánimo y a medida.
+      </p>
    </div>
 </template>
 
@@ -117,45 +62,41 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.carousel-container {
+   position: relative;
+   width: 100%;
+   height: 100vh;
+
+}
+
 body {
    font-family: 'Roboto', sans-serif;
-   /* Fuente Roboto */
+   margin: 0;
+   padding: 0;
+   overflow-x: hidden;
 }
 
-/* Estilo para el primer título */
-.text-5xl {
-   font-size: 2.5rem;
-   font-weight: bold;
-   color: white;
-   /* Color del título */
-   margin: 1.5rem 0;
+.text-overlay {
+   position: absolute;
+   top: 125pt;
+   left: 200pt;
+   width: 400px;
+   margin: 0 auto;
+   text-align: justify;
 }
 
-/* Estilo para el segundo y tercer título */
-.text-3xl {
-   font-size: 1.75rem;
-   font-weight: bold;
-   color: white;
-   /* Color de los títulos */
-   margin-top: 1rem;
+@keyframes fadeIn {
+   from {
+      opacity: 0;
+   }
+
+   to {
+      opacity: 1;
+   }
 }
 
-/* Estilo para el texto normal */
-.text-light {
-   font-size: 1.25rem;
-   color: white;
-   /* Color del texto normal */
+.fade-in {
+   animation: fadeIn 1s ease-in-out;
 }
-
-/* Estilo para el texto en un color más neutro */
-.text-neutral-950 {
-   font-size: 1.25rem;
-   color: black;
-   /* Color del texto neutro */
-   margin-bottom: 1rem;
-}
-
-
-
 </style>
