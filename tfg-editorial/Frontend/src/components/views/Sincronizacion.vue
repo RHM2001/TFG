@@ -1,5 +1,7 @@
 <template>
     <div class="container mx-auto py-8 lg:pt-8">
+
+
         <div
             class="block rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
             <h5 class="mb-2 text-xl font-medium leading-tight text-black text-center">
@@ -14,7 +16,7 @@
                 </div>
             </div>
 
-            <div >
+            <div>
                 <table class="min-w-full border border-gray-300 divide-y divide-gray-300">
                     <thead class="bg-gray-50">
                         <tr>
@@ -36,7 +38,7 @@
                         <tr v-for="(cancion, index) in sortedAndFilteredCanciones" :key="index">
                             <td class="px-6 py-4 whitespace-nowrap">{{ cancion.nombre }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ cancion.entidadNombre }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ cancion.generoNombres ? cancion.generoNombres.join(', ') : "" }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ cancion.generoNombres ? cancion.generoNombres.join(',') : "" }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ cancion.duracion }}</td>
                         </tr>
                     </tbody>
