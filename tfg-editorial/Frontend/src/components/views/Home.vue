@@ -7,7 +7,7 @@
          <div class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
             <!--First item-->
             <div
-               class="relative float-left -mr-[100%] w-full transition-transform duration-[800ms] ease-in-out motion-reduce:transition-none"
+               class="relative float-left -mr-[100%] w-full transition-transform duration-[400ms] ease-in-out motion-reduce:transition-none"
                data-te-carousel-active data-te-carousel-item style="backface-visibility: hidden">
                <img src="https://www.sonbuenos.com/wp-content/uploads/2023/06/PORTADA-EP-HOONINE.jpg"
                   class="block w-full object-cover h-[1000px]" alt="..." />
@@ -15,15 +15,15 @@
             </div>
             <!--Second item-->
             <div
-               class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[800ms] ease-in-out motion-reduce:transition-none"
+               class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[400ms] ease-in-out motion-reduce:transition-none"
                data-te-carousel-item style="backface-visibility: hidden">
-               <img src="https://www.somosclaim.com/wp-content/uploads/2021/06/IMG_9707-Editar-2-1.jpg"
+               <img src="https://th.bing.com/th/id/R.6d7f22c16fc546f63c0a8336f3dbf471?rik=%2bIWQcYwyvo54kQ&riu=http%3a%2f%2fartmusicagency.es%2fimages%2fnunatak.jpg&ehk=jqMpnzLckRt0x7Ras4XEmH5XEEJEE6bQGNXJnXKrFKk%3d&risl=&pid=ImgRaw&r=0"
                   class="block w-full object-cover h-[1000px]" alt="..." />
 
             </div>
             <!--Third item-->
             <div
-               class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[800ms] ease-in-out motion-reduce:transition-none"
+               class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[400ms] ease-in-out motion-reduce:transition-none"
                data-te-carousel-item style="backface-visibility: hidden">
                <img src="https://s1.lanzadigital.com/wp-content/uploads/2022/05/Arde_Bogota_Zahora_Magestic_CD_4.jpg"
                   class="block w-full object-cover h-[1000px]" alt="..." />
@@ -36,11 +36,11 @@
    </div>
 
    <div class="text-overlay fade-in">
-      <p class="font-lara" style="font-size: 40px; color: white;">Representamos una amplia librería
+      <p class="font-lara" style="font-size: 30px; color: white;">Representamos una amplia librería
          de música, un catálogo con artistas con denominación de origen en la
          Región de Murcia.</p>
 
-      <p class="font-lara mt-8" style="font-size: 40px; color: white;">
+      <p class="font-lara mt-8" style="font-size: 30px; color: white;">
          ¡Consultanos para conseguir
          esa canción que necesitas!
          De todos los géneros, sensaciones,
@@ -66,21 +66,14 @@ export default {
 .carousel-container {
    position: relative;
    width: 100%;
-   height: 100vh;
 
-}
 
-body {
-   font-family: 'Roboto', sans-serif;
-   margin: 0;
-   padding: 0;
-   overflow-x: hidden;
 }
 
 .text-overlay {
    position: absolute;
    top: 125pt;
-   left: 200pt;
+   left: 100pt;
    width: 400px;
    margin: 0 auto;
    text-align: justify;
