@@ -8,6 +8,12 @@
                 Catálogo con filtros y búsqueda
             </h5>
 
+            <audio class="mb-3" controls>
+                <source src="{URI de Spotify}" type="audio/mpeg">
+                Tu navegador no soporta la reproducción de audio.
+            </audio>
+
+
 
 
             <div class="relative mb-3 fade-in collapse-container">
@@ -85,6 +91,17 @@
 
 <script>
 import axios from 'axios';
+
+// Función para obtener el token de acceso del servidor
+async function fetchAccessToken() {
+    try {
+        const response = await axios.get('http://localhost:3000/get-token'); // Ruta del servidor que obtiene el token
+        return response.data.access_token;
+    } catch (error) {
+        console.error('Error al obtener el token de acceso:', error);
+        return null;
+    }
+}
 
 export default {
     data() {
