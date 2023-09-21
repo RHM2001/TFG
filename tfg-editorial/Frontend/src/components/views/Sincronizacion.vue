@@ -14,21 +14,14 @@
             </audio>
 
 
+            <div class="relative mb-3 flex flex-wrap items-stretch">
 
+                <input v-model="searchQuery" type="search"
+                    class="relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-gray-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-l-pink-600 focus:text-gray-700 focus:shadow-[inset_0_0_0_1px_rgb(203,81,163)] "
+                    placeholder="Buscar" aria-label="Buscar" />
 
-            <div class="relative mb-3 fade-in collapse-container">
-
-                <div class="mb-3 ">
-                    <div class="relative mb-4 flex w-full flex-wrap items-stretch">
-                        <input v-model="searchQuery" type="search"
-                            class="relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-gray-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-gray-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none"
-                            placeholder="Buscar" aria-label="Buscar" />
-                    </div>
-                </div>
-
-                <div data-te-dropdown-ref>
-                    <button
-                        class="flex items-center whitespace-nowrap rounded bg-secondary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-secondary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-secondary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-secondary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                <div class="relative" data-te-dropdown-ref>
+                    <a class="flex items-center whitespace-nowrap text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                         type="button" id="dropdownMenuButton1" data-te-dropdown-toggle-ref aria-expanded="false"
                         data-te-ripple-init data-te-ripple-color="light">
                         Filtros
@@ -39,18 +32,22 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </span>
-                    </button>
+                    </a>
                     <ul class="absolute z-[1000] float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg
                         border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700
                         [&[data-te-dropdown-show]]:block" aria-labelledby="dropdownMenuButton1"
                         data-te-dropdown-menu-ref>
                         <li>
                             <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
-                                href="#" data-te-dropdown-item-ref>Género</a>
+                                data-te-dropdown-item-ref>Género</a>
                         </li>
                         <li>
                             <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
-                                href="#" data-te-dropdown-item-ref>Duración</a>
+                                data-te-dropdown-item-ref>Duración</a>
+                        </li>
+                        <li>
+                            <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                                data-te-dropdown-item-ref>Entidad</a>
                         </li>
                     </ul>
                 </div>
