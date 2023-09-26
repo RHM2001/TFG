@@ -1,18 +1,16 @@
 <template>
     <div class="container mx-auto py-8 lg:pt-8">
 
+        <iframe style="border-radius:12px"
+            src="https://open.spotify.com/embed/track/60PHayCjXTNL0iw81DlNxi?utm_source=generator" width="50%" height="152"
+            frameBorder="0" allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
         <div
             class="block rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
             <h5 class="mb-2 text-xl font-medium leading-tight text-black text-center">
                 Catálogo con filtros y búsqueda
             </h5>
-
-            <audio class="mb-3" controls>
-                <source src="{URI de Spotify}" type="audio/mpeg">
-                Tu navegador no soporta la reproducción de audio.
-            </audio>
-
 
             <div class="relative mb-3 flex flex-wrap items-stretch">
 
@@ -89,16 +87,7 @@
 <script>
 import axios from 'axios';
 
-// Función para obtener el token de acceso del servidor
-async function fetchAccessToken() {
-    try {
-        const response = await axios.get('http://localhost:3000/get-token'); // Ruta del servidor que obtiene el token
-        return response.data.access_token;
-    } catch (error) {
-        console.error('Error al obtener el token de acceso:', error);
-        return null;
-    }
-}
+
 
 export default {
     data() {
@@ -110,7 +99,8 @@ export default {
         };
     },
     mounted() {
-        this.fetchCanciones();
+        this.initialize();
+
     },
     methods: {
         async fetchCanciones() {
@@ -127,6 +117,28 @@ export default {
                 console.log(response.data); // Mover el console.log aquí
             } catch (error) {
                 console.error('Error fetching canciones:', error);
+            }
+        },
+
+        async fetchAccessToken() {
+            try {
+                const response = await axios.get('http://localhost:3000/get-spotify-token'); // Ruta del servidor para obtener el token
+                return response.data.access_token;
+            } catch (error) {
+                console.error('Error al obtener el token de acceso:', error);
+                return null;
+            }
+        },
+
+        async initialize() {
+            
+            const accessToken = await this.fetchAccessToken();
+            if (accessToken) {
+                // Aquí puedes usar el token de acceso para realizar solicitudes a la API de Spotify
+                console.log('Token de acceso:', accessToken);
+                this.fetchCanciones(); // Llamar a fetchCanciones después de obtener el token
+            } else {
+                console.error('No se pudo obtener el token de acceso.');
             }
         },
 
