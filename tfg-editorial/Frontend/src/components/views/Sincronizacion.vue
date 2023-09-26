@@ -1,10 +1,16 @@
 <template>
     <div class="container mx-auto py-8 lg:pt-8">
 
-        <iframe style="border-radius:12px"
-            src="https://open.spotify.com/embed/track/60PHayCjXTNL0iw81DlNxi?utm_source=generator" width="50%" height="152"
-            frameBorder="0" allowfullscreen=""
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <div>
+            <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/68PEuXNjodWFts3Ph4BPVv?utm_source=generator" width="50%"
+                height="152" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+            <!-- En tu archivo HTML -->
+            <button id="login-button">Iniciar sesión con Spotify</button>
+
+        </div>
 
         <div
             class="block rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
@@ -87,6 +93,15 @@
 <script>
 import axios from 'axios';
 
+document.addEventListener('DOMContentLoaded', () => {
+    const loginButton = document.getElementById('login-button');
+
+    loginButton.addEventListener('click', () => {
+        // Redirige a la página de inicio de sesión de Spotify
+        window.location.href = 'https://accounts.spotify.com/authorize?client_id=5ba3471f79a443b49a0135b669294f42&response_type=code&redirect_uri=http://localhost:5173/#/sincronizacion&scope=SCOPE';
+
+    });
+});
 
 
 export default {
@@ -100,9 +115,9 @@ export default {
     },
     mounted() {
         this.initialize();
-
     },
     methods: {
+
         async fetchCanciones() {
             try {
                 const response = await axios.get('http://localhost:8000/api/editorial/canciones/');
@@ -120,28 +135,10 @@ export default {
             }
         },
 
-        async fetchAccessToken() {
-            try {
-                const response = await axios.get('http://localhost:3000/get-spotify-token'); // Ruta del servidor para obtener el token
-                return response.data.access_token;
-            } catch (error) {
-                console.error('Error al obtener el token de acceso:', error);
-                return null;
-            }
-        },
-
         async initialize() {
-            
-            const accessToken = await this.fetchAccessToken();
-            if (accessToken) {
-                // Aquí puedes usar el token de acceso para realizar solicitudes a la API de Spotify
-                console.log('Token de acceso:', accessToken);
-                this.fetchCanciones(); // Llamar a fetchCanciones después de obtener el token
-            } else {
-                console.error('No se pudo obtener el token de acceso.');
-            }
-        },
+            this.accessToken = await this.fetchAccessToken();
 
+        },
 
         async fetchEntidadName(cancion) {
             try {
@@ -232,5 +229,4 @@ export default {
 
 .fade-in {
     animation: fadeIn 1s ease-in-out;
-}
-</style>
+}</style>
