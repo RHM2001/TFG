@@ -3,12 +3,12 @@
 
         <div>
             <iframe style="border-radius:12px"
-                src="https://open.spotify.com/embed/track/68PEuXNjodWFts3Ph4BPVv?utm_source=generator" width="50%"
+                src="https://open.spotify.com/embed/track/60PHayCjXTNL0iw81DlNxi?utm_source=generator" width="100%"
                 height="152" frameBorder="0" allowfullscreen=""
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
-            <!-- En tu archivo HTML -->
-            <button id="login-button">Iniciar sesión con Spotify</button>
+
+            <button @click="loginWithSpotify">Iniciar sesión en Spotify</button>
 
         </div>
 
@@ -93,17 +93,6 @@
 <script>
 import axios from 'axios';
 
-document.addEventListener('DOMContentLoaded', () => {
-    const loginButton = document.getElementById('login-button');
-
-    loginButton.addEventListener('click', () => {
-        // Redirige a la página de inicio de sesión de Spotify
-        window.location.href = 'https://accounts.spotify.com/authorize?client_id=5ba3471f79a443b49a0135b669294f42&response_type=code&redirect_uri=http://localhost:5173/#/sincronizacion&scope=SCOPE';
-
-    });
-});
-
-
 export default {
     data() {
         return {
@@ -114,7 +103,12 @@ export default {
         };
     },
     mounted() {
-        this.initialize();
+        this.fetchCanciones();
+        const accessToken = this.getAccessTokenFromURL();
+        if (accessToken) {
+            // Aquí puede usar el token de acceso para interactuar con la API de Spotify en nombre del usuario.
+            console.log('Token de acceso de Spotify:', accessToken);
+        }
     },
     methods: {
 
@@ -135,9 +129,28 @@ export default {
             }
         },
 
-        async initialize() {
-            this.accessToken = await this.fetchAccessToken();
+        getAccessTokenFromURL() {
+            const hashParams = window.location.hash.substr(1).split('&');
+            const tokenParam = hashParams.find(param => param.startsWith('access_token='));
+            if (tokenParam) {
+                return tokenParam.split('=')[1];
+            }
+            return null;
+        },
 
+        loginWithSpotify() {
+            const clientId = '5ba3471f79a443b49a0135b669294f42';
+            const redirectUri = 'http://localhost:5173/sincronizacion';
+            const scopes = ['user-read-private', 'user-read-email']; // Agregue los permisos que necesite
+
+            const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join('%20')}`;
+
+
+            window.location.href = authUrl;
+        },
+
+        async initialize() {
+            await this.fetchCanciones();
         },
 
         async fetchEntidadName(cancion) {
@@ -229,4 +242,5 @@ export default {
 
 .fade-in {
     animation: fadeIn 1s ease-in-out;
-}</style>
+}
+</style>

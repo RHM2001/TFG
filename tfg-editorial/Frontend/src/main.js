@@ -1,12 +1,11 @@
 import './style.css';
 import { createApp } from 'vue';
 import App from './App.vue';
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
 import Home from './components/views/Home.vue';
 import Artistas from './components/views/Artistas.vue';
 import Sincronizacion from './components/views/Sincronizacion.vue';
-
 
 const routes = [
     { path: '/', name: 'home', component: Home },
@@ -15,7 +14,7 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(), // Cambiado a createWebHistory()
     routes,
 });
 
@@ -25,4 +24,3 @@ const app = createApp(App);
 app.use(router);
 
 app.mount('#app');
-
