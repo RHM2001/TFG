@@ -1,14 +1,16 @@
 <template>
-    <div class="container mx-auto py-8 lg:pt-8">
+    <div class="container mx-auto py-8 lg:pt-8 fade-in">
 
-        <div>
+        <div class="mb-3">
+            <button @click="loginWithSpotify" type="button"
+                class="custom-button text-dark bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                <img src="public/images/spotify_icon_32.png" alt="Descripción de la imagen" class="button-image">
+                Login</button>
+
             <iframe style="border-radius:12px"
                 src="https://open.spotify.com/embed/track/60PHayCjXTNL0iw81DlNxi?utm_source=generator" width="100%"
                 height="152" frameBorder="0" allowfullscreen=""
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
-
-            <button @click="loginWithSpotify">Iniciar sesión en Spotify</button>
 
         </div>
 
@@ -20,9 +22,11 @@
 
             <div class="relative mb-3 flex flex-wrap items-stretch">
 
-                <input v-model="searchQuery" type="search"
+
+                <input id="datatable-search-input" type="search"
                     class="relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-gray-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-l-pink-600 focus:text-gray-700 focus:shadow-[inset_0_0_0_1px_rgb(203,81,163)] "
-                    placeholder="Buscar" aria-label="Buscar" />
+                    placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon1" />
+
 
                 <div class="relative" data-te-dropdown-ref>
                     <a class="flex items-center whitespace-nowrap text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
@@ -58,33 +62,8 @@
             </div>
 
             <div>
-                <table class="min-w-full border border-gray-300 divide-y divide-gray-300 fade-in">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-                                @click="sortBy('nombre')">Nombre</th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-                                @click="sortBy('entidadNombre')">Entidad</th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-                                @click="sortBy('generoNombres')">Género</th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-                                @click="sortBy('duracion')">Duración</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-300">
-                        <tr v-for="(cancion, index) in sortedAndFilteredCanciones" :key="index">
-                            <td class="px-6 py-4 whitespace-nowrap">{{ cancion.nombre }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ cancion.entidadNombre }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ cancion.generoNombres ?
-                                cancion.generoNombres.join(',') : "" }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ cancion.duracion }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+
+                <div id="datatable"></div>
             </div>
         </div>
     </div>
@@ -92,6 +71,13 @@
 
 <script>
 import axios from 'axios';
+
+import {
+    Datatable,
+    initTE,
+} from "tw-elements";
+
+initTE({ Datatable });
 
 export default {
     data() {
@@ -104,38 +90,41 @@ export default {
     },
     mounted() {
         this.fetchCanciones();
-        const accessToken = this.getAccessTokenFromURL();
-        if (accessToken) {
-            // Aquí puede usar el token de acceso para interactuar con la API de Spotify en nombre del usuario.
-            console.log('Token de acceso de Spotify:', accessToken);
-        }
     },
     methods: {
 
         async fetchCanciones() {
             try {
                 const response = await axios.get('http://localhost:8000/api/editorial/canciones/');
-                this.canciones = response.data;
+                const canciones = response.data.map(cancion => {
+                    return [
+                        cancion.nombre,
+                        cancion.entidad,
+                        cancion.genero,
+                        cancion.duracion,
+                        '<button class="btn-escuchar"> <img class="btn-image" src="public/images/boton-de-play.png" alt="Descripción de la imagen"></button>',
+                    ]
+                });
 
-                // Para cada canción, obtén el nombre de la entidad a través de otra solicitud
-                for (const cancion of this.canciones) {
-                    await this.fetchEntidadName(cancion);
-                    await this.fetchGeneroNames(cancion);
-                }
+                const columns = ['Canción', 'Artista', 'Género', 'Duración', 'Escucha'];
+                const data = {
+                    columns,
+                    rows: canciones,
+                };
 
-                console.log(response.data); // Mover el console.log aquí
+                // Inicializa el DataTable con los datos obtenidos
+                this.initDataTable(data);
             } catch (error) {
                 console.error('Error fetching canciones:', error);
             }
         },
 
-        getAccessTokenFromURL() {
-            const hashParams = window.location.hash.substr(1).split('&');
-            const tokenParam = hashParams.find(param => param.startsWith('access_token='));
-            if (tokenParam) {
-                return tokenParam.split('=')[1];
-            }
-            return null;
+        initDataTable(data) {
+            const instance = new Datatable(document.getElementById('datatable'), data);
+
+            document.getElementById('datatable-search-input').addEventListener('input', (e) => {
+                instance.search(e.target.value);
+            });
         },
 
         loginWithSpotify() {
@@ -147,10 +136,6 @@ export default {
 
 
             window.location.href = authUrl;
-        },
-
-        async initialize() {
-            await this.fetchCanciones();
         },
 
         async fetchEntidadName(cancion) {
@@ -179,51 +164,10 @@ export default {
                 cancion.generoNombres = []; // Asignar un arreglo vacío en caso de error
             }
         },
-        sortBy(key) {
-            if (this.sortKey === key) {
-                this.sortOrder *= -1;
-            } else {
-                this.sortKey = key;
-                this.sortOrder = 1;
-            }
-        },
-
-
-
-        performSearch() {
-            // Filtra las canciones en función de la searchQuery
-            this.filteredCanciones = this.canciones.filter(cancion =>
-                cancion.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())
-                || cancion.entidadNombre.toLowerCase().includes(this.searchQuery.toLowerCase())
-                || (cancion.generoNombres && cancion.generoNombres.join(', ').toLowerCase().includes(this.searchQuery.toLowerCase()))
-            );
-        },
 
     },
     computed: {
-        sortedAndFilteredCanciones() {
-            let filteredCanciones = this.canciones;
 
-            if (this.searchQuery) {
-                filteredCanciones = this.canciones.filter(cancion =>
-                    cancion.nombre.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                    cancion.entidadNombre.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                    (cancion.generoNombres && cancion.generoNombres.join(', ').toLowerCase().includes(this.searchQuery.toLowerCase()))
-                );
-            }
-
-            if (this.sortKey) {
-                const sorted = filteredCanciones.slice().sort((a, b) => {
-                    const valA = a[this.sortKey];
-                    const valB = b[this.sortKey];
-                    if (valA === valB) return 0;
-                    return this.sortOrder * (valA > valB ? 1 : -1);
-                });
-                return sorted;
-            }
-
-            return filteredCanciones;
-        },
     },
 };
 
@@ -242,5 +186,31 @@ export default {
 
 .fade-in {
     animation: fadeIn 1s ease-in-out;
+}
+
+.custom-button {
+    display: flex;
+    align-items: center;
+}
+
+.button-image {
+    margin-right: 10px;
+}
+
+.btn-escuchar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-escuchar .btn-image {
+    width: 35px;
+    height: 35px;
+}
+
+.columna-botones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
