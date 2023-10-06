@@ -2,11 +2,11 @@
     <div class="container mx-auto py-8 lg:pt-8 fade-in">
 
         <div class="mb-3">
-            <button @click="loginWithSpotify" type="button"
+            <button @click="loginWithSpotify" type="button" id="botonInicioSesion"
                 class="custom-button text-dark bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                 <img src="public/images/spotify_icon_32.png" alt="Descripción de la imagen" class="button-image">
-                Login</button>
-
+                Login
+            </button>
             <iframe style="border-radius:12px"
                 src="https://open.spotify.com/embed/track/60PHayCjXTNL0iw81DlNxi?utm_source=generator" width="100%"
                 height="152" frameBorder="0" allowfullscreen=""
@@ -16,9 +16,9 @@
 
         <div
             class="block rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
-            <h5 class="mb-2 text-xl font-medium leading-tight text-black text-center">
-                Catálogo con filtros y búsqueda
-            </h5>
+            <h1 class="mb-2 text-3xl font-medium leading-tight text-black text-center font-lara">
+                Explora el Universo Musical de nuestra editorial
+            </h1>
 
             <div class="relative mb-3 flex flex-wrap items-stretch">
 
@@ -79,13 +79,33 @@ import {
 
 initTE({ Datatable });
 
+// Función para verificar el estado de la sesión de Spotify
+async function checkSpotifySession() {
+    try {
+        // Haz una solicitud al servidor para verificar el estado de la sesión de Spotify
+        const response = await fetch('/verificar-sesion-spotify');
+
+        // Si la respuesta indica que el usuario está autenticado, oculta el botón de inicio de sesión
+        if (response.ok) {
+            document.getElementById('botonInicioSesion').style.display = 'none';
+        } else {
+            // Si el usuario no está autenticado, muestra el botón de inicio de sesión
+            document.getElementById('botonInicioSesion').style.display = 'block';
+        }
+    } catch (error) {
+        console.error('Error al verificar la sesión de Spotify:', error);
+    }
+}
+
+// Llama a la función para verificar la sesión de Spotify al cargar la página
+window.addEventListener('load', checkSpotifySession);
+
+
 export default {
     data() {
         return {
             canciones: [],
-            searchQuery: "",
-            sortKey: 'nombre',
-            sortOrder: 1,
+            loggedIn: false,
         };
     },
     mounted() {
@@ -133,15 +153,65 @@ export default {
         },
 
         loginWithSpotify() {
-            const clientId = '5ba3471f79a443b49a0135b669294f42';
-            const redirectUri = 'http://localhost:5173/sincronizacion';
-            const scopes = ['user-read-private', 'user-read-email']; // Agregue los permisos que necesite
 
-            const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join('%20')}`;
 
+            const authUrl = "http://localhost:3000/login";
 
             window.location.href = authUrl;
         },
+
+        checkAuthorizationCode() {
+            const urlSearchParams = new URLSearchParams(window.location.search);
+            const code = urlSearchParams.get('code');
+
+            if (code) {
+                // El usuario ha iniciado sesión y autorizado la aplicación
+                // Usa el código de autorización para obtener tokens de acceso y actualización
+                this.exchangeCodeForTokens(code);
+            } else {
+                console.error('Código de autorización no encontrado en la URL');
+            }
+        },
+
+        async exchangeCodeForTokens(code) {
+            const clientId = '5ba3471f79a443b49a0135b669294f42'; // Reemplaza con tu ID de cliente de Spotify
+            const clientSecret = '55179f174d5e433d9a16eb9b8fa9c333'; // Reemplaza con tu secreto de cliente de Spotify
+            const redirectUri = 'http://localhost:3000/callback'; // Reemplaza con tu URI de redirección
+
+            try {
+                const response = await axios.post('https://accounts.spotify.com/api/token', null, {
+                    params: {
+                        grant_type: 'authorization_code',
+                        code: code,
+                        redirect_uri: redirectUri,
+                    },
+                    headers: {
+                        'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret),
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                });
+
+                const accessToken = response.data.access_token;
+                const refreshToken = response.data.refresh_token;
+
+                // Guarda el token de acceso y el token de actualización en tu aplicación (por ejemplo, en el estado del componente Vue.js o en las cookies)
+                // ...
+
+                console.log('Token de acceso:', accessToken);
+                console.log('Token de actualización:', refreshToken);
+            } catch (error) {
+                console.error('Error al intercambiar el código por tokens:', error);
+                const accessToken = error.response.data.access_token;
+                const refreshToken = error.response.data.refresh_token;
+
+                // Guarda el token de acceso y el token de actualización en tu aplicación (por ejemplo, en el estado del componente Vue.js o en las cookies)
+                // ...
+
+                console.log('Token de acceso:', accessToken);
+                console.log('Token de actualización:', refreshToken);
+            }
+        },
+
 
         async fetchEntidadName(cancion) {
             try {

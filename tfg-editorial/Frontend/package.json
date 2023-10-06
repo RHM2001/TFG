@@ -12,6 +12,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "tw-elements": "^1.0.0-beta3",
+    "url-search-params-polyfill": "^8.2.5",
     "vue": "^3.3.4",
     "vue-good-table": "^2.21.11",
     "vue-router": "^4.2.4"

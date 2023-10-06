@@ -66,8 +66,6 @@ export default {
 .carousel-container {
    position: relative;
    width: 100%;
-
-
 }
 
 .text-overlay {
