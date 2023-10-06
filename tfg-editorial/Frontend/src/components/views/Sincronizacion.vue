@@ -96,15 +96,20 @@ export default {
         async fetchCanciones() {
             try {
                 const response = await axios.get('http://localhost:8000/api/editorial/canciones/');
-                const canciones = response.data.map(cancion => {
+                const canciones = await Promise.all(response.data.map(async (cancion) => {
+
+                    // Obtengo los nombres de la Entidad y del Género
+                    await this.fetchEntidadName(cancion);
+                    await this.fetchGeneroNames(cancion);
+
                     return [
                         cancion.nombre,
-                        cancion.entidad,
-                        cancion.genero,
+                        cancion.entidadNombre,
+                        cancion.generoNombres.join(', '),
                         cancion.duracion,
                         '<button class="btn-escuchar"> <img class="btn-image" src="public/images/boton-de-play.png" alt="Descripción de la imagen"></button>',
                     ]
-                });
+                }));
 
                 const columns = ['Canción', 'Artista', 'Género', 'Duración', 'Escucha'];
                 const data = {
@@ -112,8 +117,8 @@ export default {
                     rows: canciones,
                 };
 
-                // Inicializa el DataTable con los datos obtenidos
                 this.initDataTable(data);
+
             } catch (error) {
                 console.error('Error fetching canciones:', error);
             }
