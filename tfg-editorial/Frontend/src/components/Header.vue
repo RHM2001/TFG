@@ -37,7 +37,7 @@
                         <li class="mb-0 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                             <router-link to="/sincronizacion"
                                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-pink-600  lg:p-2 [&.active]:text-black/90"
-                                href="#!" data-te-nav-link-ref data-te-ripple-init
+                                 data-te-nav-link-ref data-te-ripple-init
                                 data-te-ripple-color="light">Sincronización
                             </router-link>
                         </li>

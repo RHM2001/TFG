@@ -2,15 +2,15 @@
     <div class="container mx-auto py-8 lg:pt-8 fade-in">
 
         <div class="mb-3">
-            <button @click="loginWithSpotify" type="button" id="botonInicioSesion"
+            <button v-if="!isLoggedIn" @click="loginWithSpotify" type="button" id="botonLoginSpotify"
                 class="custom-button text-dark bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                 <img src="public/images/spotify_icon_32.png" alt="Descripción de la imagen" class="button-image">
                 Login
             </button>
-            <iframe style="border-radius:12px"
-                src="https://open.spotify.com/embed/track/60PHayCjXTNL0iw81DlNxi?utm_source=generator" width="100%"
-                height="152" frameBorder="0" allowfullscreen=""
+            <iframe id="spotify-iframe" v-if="accessToken" style="border-radius:12px" width="100%" height="152"
+                frameBorder="0" allowfullscreen=""
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
 
         </div>
 
@@ -79,39 +79,45 @@ import {
 
 initTE({ Datatable });
 
-// Función para verificar el estado de la sesión de Spotify
-async function checkSpotifySession() {
-    try {
-        // Haz una solicitud al servidor para verificar el estado de la sesión de Spotify
-        const response = await fetch('/verificar-sesion-spotify');
-
-        // Si la respuesta indica que el usuario está autenticado, oculta el botón de inicio de sesión
-        if (response.ok) {
-            document.getElementById('botonInicioSesion').style.display = 'none';
-        } else {
-            // Si el usuario no está autenticado, muestra el botón de inicio de sesión
-            document.getElementById('botonInicioSesion').style.display = 'block';
-        }
-    } catch (error) {
-        console.error('Error al verificar la sesión de Spotify:', error);
-    }
-}
-
-// Llama a la función para verificar la sesión de Spotify al cargar la página
-window.addEventListener('load', checkSpotifySession);
-
 
 export default {
     data() {
         return {
             canciones: [],
-            loggedIn: false,
+            isLoggedIn: false,
+            accessToken: null,
         };
     },
     mounted() {
-        this.fetchCanciones();
+        this.accessToken = window.location.hash.substr(1).split('&')[0].split('=')[1];
+        console.log("TOKEN: " + this.accessToken);
+        if (this.accessToken) {
+            console.log("Dentro del IF");
+            this.isLoggedIn = true;
+            this.fetchCanciones().then(() => {
+                this.getSpotifyEmbedUrl(this.accessToken);
+            });
+        } else {
+            console.log("Dentro del ELSE");
+            this.fetchCanciones();
+        }
     },
     methods: {
+
+        async getSpotifyEmbedUrl(accessToken) {
+            console.log('Access Token:', accessToken);
+            await this.$nextTick(); // Espera a que Vue haya renderizado el componente
+            const iframeElement = document.getElementById('spotify-iframe');
+            console.log('Iframe Element:', iframeElement);
+            if (iframeElement) {
+                const spotifyEmbedUrl = `https://open.spotify.com/embed/track/60PHayCjXTNL0iw81DlNxi?utm_source=generator&access_token=${accessToken}`;
+                iframeElement.src = spotifyEmbedUrl;
+            } else {
+                console.error('Element with ID "spotify-iframe" not found');
+            }
+        },
+
+
 
         async fetchCanciones() {
             try {
@@ -145,6 +151,10 @@ export default {
         },
 
         initDataTable(data) {
+
+            const tableElement = document.getElementById('datatable');
+            tableElement.innerHTML = '';
+
             const instance = new Datatable(document.getElementById('datatable'), data);
 
             document.getElementById('datatable-search-input').addEventListener('input', (e) => {
@@ -153,11 +163,12 @@ export default {
         },
 
         loginWithSpotify() {
+            const clientId = '5ba3471f79a443b49a0135b669294f42';
+            const scopes = 'user-read-private user-read-email'; // Agrega los permisos que necesites
+            const redirectUri = 'http://localhost:5173/sincronizacion'; // Asegúrate de que coincida con la configuración en la aplicación de Spotify
 
-
-            const authUrl = "http://localhost:3000/login";
-
-            window.location.href = authUrl;
+            // Redirigir al usuario a la página de autorización de Spotify
+            window.location.href = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirectUri)}`;
         },
 
         checkAuthorizationCode() {
