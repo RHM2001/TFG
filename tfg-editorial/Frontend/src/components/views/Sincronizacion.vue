@@ -62,7 +62,6 @@
             </div>
 
             <div>
-
                 <div id="datatable"></div>
             </div>
         </div>
@@ -89,19 +88,19 @@ export default {
         };
     },
     mounted() {
-        this.accessToken = window.location.hash.substr(1).split('&')[0].split('=')[1];
-        console.log("TOKEN: " + this.accessToken);
-        if (this.accessToken) {
-            console.log("Dentro del IF");
+        const accessTokenFromURL = window.location.hash.substr(1).split('&')[0].split('=')[1];
+
+        if (accessTokenFromURL) {
+            this.accessToken = accessTokenFromURL;
             this.isLoggedIn = true;
-            this.fetchCanciones().then(() => {
-                this.getSpotifyEmbedUrl(this.accessToken);
+            this.getSpotifyEmbedUrl(this.accessToken).then(() => {
+                this.fetchCanciones();
             });
         } else {
-            console.log("Dentro del ELSE");
             this.fetchCanciones();
         }
-    },
+    }
+    ,
     methods: {
 
         async getSpotifyEmbedUrl(accessToken) {
@@ -118,7 +117,6 @@ export default {
         },
 
 
-
         async fetchCanciones() {
             try {
                 const response = await axios.get('http://localhost:8000/api/editorial/canciones/');
@@ -127,17 +125,26 @@ export default {
                     // Obtengo los nombres de la Entidad y del Género
                     await this.fetchEntidadName(cancion);
                     await this.fetchGeneroNames(cancion);
+                    //console.log('ID de Spotify:', cancion.idSpotify);
+                    const botonEscuchar = `<button class="btn-escuchar" data-id="${cancion.idSpotify}" @click="reproducirCancion(${cancion.idSpotify})"> <img class="btn-image" src="public/images/boton-de-play.png" alt="Descripción de la imagen"></button>`;
 
-                    return [
-                        cancion.nombre,
-                        cancion.entidadNombre,
-                        cancion.generoNombres.join(', '),
-                        cancion.duracion,
-                        '<button class="btn-escuchar"> <img class="btn-image" src="public/images/boton-de-play.png" alt="Descripción de la imagen"></button>',
-                    ]
+                    return {
+                        cancion: cancion.nombre,
+                        artista: cancion.entidadNombre,
+                        genero: cancion.generoNombres.join(', '),
+                        duracion: cancion.duracion,
+                        escucha: botonEscuchar,
+                    };
                 }));
 
-                const columns = ['Canción', 'Artista', 'Género', 'Duración', 'Escucha'];
+                const columns = [
+                    { label: "Canción", field: "cancion" },
+                    { label: "Artista", field: "artista" },
+                    { label: "Género", field: "genero" },
+                    { label: "Duración", field: "duracion" },
+                    { label: "Escucha", field: "escucha", sort: false },
+                ];
+
                 const data = {
                     columns,
                     rows: canciones,
@@ -145,8 +152,41 @@ export default {
 
                 this.initDataTable(data);
 
+                const buttons = document.querySelectorAll('.btn-escuchar');
+                buttons.forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const idSpotify = button.getAttribute('data-id');
+                        if (!this.isLoggedIn) {
+                            console.error('Iniciar sesion en Spotify');
+                        }
+                        else if (idSpotify) {
+                            console.log("ID de SPOTIFY  : " + idSpotify);
+                            this.reproducirCancion(idSpotify);
+                        } else {
+                            console.error('ID de Spotify es nulo o indefinido');
+                        }
+                    });
+                });
+
+
             } catch (error) {
                 console.error('Error fetching canciones:', error);
+            }
+        },
+
+        async reproducirCancion(idSpotify) {
+            try {
+                console.log("ID de SPOTIFY desde el reproducir : " + idSpotify);
+                console.log(`Clic en el botón de reproducción. ID de Spotify: ${idSpotify}`);
+
+                // Construye el enlace de Spotify
+                const spotifyEmbedUrl = `https://open.spotify.com/embed/track/${idSpotify}?utm_source=generator&access_token=${this.accessToken}`;
+
+                // Actualiza el iframe con el nuevo enlace
+                const iframeElement = document.getElementById('spotify-iframe');
+                iframeElement.src = spotifyEmbedUrl;
+            } catch (error) {
+                console.error('Error al obtener el ID de Spotify:', error);
             }
         },
 
@@ -228,6 +268,15 @@ export default {
             try {
                 const entidadResponse = await axios.get(`http://localhost:8000/api/editorial/entidades/${cancion.entidad}/`);
                 cancion.entidadNombre = entidadResponse.data.nombre; // Almacena el nombre de la entidad en entidadNombre
+            } catch (error) {
+                console.error('Error fetching entidad:', error);
+            }
+        },
+
+        async fetchIdSpotify(cancion) {
+            try {
+                const idSpotifyResponse = await axios.get(`http://localhost:8000/api/editorial/entidades/${cancion.idSpotify}/`);
+                return cancion.idSpotify = idSpotifyResponse.data.nombre;
             } catch (error) {
                 console.error('Error fetching entidad:', error);
             }

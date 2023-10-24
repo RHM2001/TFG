@@ -7,7 +7,6 @@ class SonBuenos(models.Model):
 
 class Artista (models.Model):
     nombre = models.CharField(max_length=50)
-    nacionalidad = models.CharField(max_length=50, null=True)
 
 class Genero (models.Model):
     nombre = models.CharField(max_length=50)
@@ -23,4 +22,6 @@ class Cancion (models.Model):
     genero = models.ManyToManyField(Genero)
     duracion = models.DurationField(null=True)
     fecha = models.DateField(null=True)
+    idSpotify = models.CharField(max_length=50)
     entidad = models.ForeignKey(EntidadMusical, on_delete=models.CASCADE)
+    
