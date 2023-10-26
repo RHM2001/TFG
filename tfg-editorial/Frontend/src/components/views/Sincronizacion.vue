@@ -2,16 +2,18 @@
     <div class="container mx-auto py-8 lg:pt-8 fade-in">
 
         <div class="mb-3">
-            <button v-if="!isLoggedIn" @click="loginWithSpotify" type="button" id="botonLoginSpotify"
-                class="custom-button text-dark bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                <img src="public/images/spotify_icon_32.png" alt="Descripción de la imagen" class="button-image">
-                Login
-            </button>
+            <div v-if="!isLoggedIn" class="relative flex flex-wrap items-stretch">
+                <button @click="loginWithSpotify" type="button" id="botonLoginSpotify"
+                    class="custom-button text-dark bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    <img src="public/images/spotify_icon_32.png" alt="Descripción de la imagen" class="button-image">
+                    Login
+                </button>
+                <span class="flex items-center whitespace-nowrap">Iniciar sesión para escuchar las canciones.</span>
+            </div>
+
             <iframe id="spotify-iframe" v-if="accessToken" style="border-radius:12px" width="100%" height="152"
                 frameBorder="0" allowfullscreen=""
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
-
         </div>
 
         <div
@@ -62,7 +64,7 @@
             </div>
 
             <div>
-                <div id="datatable"></div>
+                <div id="datatable" data-te-selectable="true" data-te-multi="true">></div>
             </div>
         </div>
     </div>
@@ -121,12 +123,11 @@ export default {
             try {
                 const response = await axios.get('http://localhost:8000/api/editorial/canciones/');
                 const canciones = await Promise.all(response.data.map(async (cancion) => {
-
-                    // Obtengo los nombres de la Entidad y del Género
                     await this.fetchEntidadName(cancion);
                     await this.fetchGeneroNames(cancion);
-                    //console.log('ID de Spotify:', cancion.idSpotify);
-                    const botonEscuchar = `<button class="btn-escuchar" data-id="${cancion.idSpotify}" @click="reproducirCancion(${cancion.idSpotify})"> <img class="btn-image" src="public/images/boton-de-play.png" alt="Descripción de la imagen"></button>`;
+
+                    const botonEscuchar = `<button class="btn-escuchar animate-fade-in" data-id="${cancion.idSpotify}"></button>`;
+                    //const botonEscuchar = `<button class="btn-escuchar" data-id="${cancion.idSpotify}"> <img class="btn-image" src="public/images/boton-de-play.png" alt="Descripción de la imagen"></button>`;
 
                     return {
                         cancion: cancion.nombre,
@@ -152,23 +153,21 @@ export default {
 
                 this.initDataTable(data);
 
-                const buttons = document.querySelectorAll('.btn-escuchar');
-                buttons.forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        const idSpotify = button.getAttribute('data-id');
+                const tableContainer = document.getElementById('datatable');
+                tableContainer.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('btn-escuchar')) {
+                        const idSpotify = target.getAttribute('data-id');
                         if (!this.isLoggedIn) {
-                            console.error('Iniciar sesion en Spotify');
-                        }
-                        else if (idSpotify) {
-                            console.log("ID de SPOTIFY  : " + idSpotify);
+                            console.error('Iniciar sesión en Spotify');
+                        } else if (idSpotify) {
+                            console.log('ID de SPOTIFY: ' + idSpotify);
                             this.reproducirCancion(idSpotify);
                         } else {
                             console.error('ID de Spotify es nulo o indefinido');
                         }
-                    });
+                    }
                 });
-
-
             } catch (error) {
                 console.error('Error fetching canciones:', error);
             }
@@ -333,19 +332,23 @@ export default {
 }
 
 .btn-escuchar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.btn-escuchar .btn-image {
+    background-image: url('public/images/boton-de-play.png');
+    /* Ruta de la imagen */
+    background-size: cover;
+    /* Ajusta el tamaño de la imagen para cubrir completamente el botón */
     width: 35px;
+    /* Ancho del botón */
     height: 35px;
+    /* Altura del botón */
 }
 
 .columna-botones {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.animate-fade-in:hover {
+    transform: scale(1.02);
 }
 </style>
