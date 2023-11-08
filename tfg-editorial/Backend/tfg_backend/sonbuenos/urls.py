@@ -4,7 +4,7 @@ from .viewsets import SonBuenosViewSet, GeneroViewSet, EntidadMusicalViewSet, Ca
 router = routers.SimpleRouter()
 router.register('sonbuenos', SonBuenosViewSet)
 router.register('generos', GeneroViewSet)
-router.register('canciones', CancionViewSet)
+router.register('canciones', CancionViewSet, basename='cancion')
 router.register('entidades', EntidadMusicalViewSet)
 router.register('artistas', ArtistaViewSet)
 

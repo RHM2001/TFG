@@ -30,41 +30,87 @@
                     placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon1" />
 
 
-                <div class="relative" data-te-dropdown-ref>
+                <div class="relative">
                     <a class="flex items-center whitespace-nowrap text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                        type="button" id="dropdownMenuButton1" data-te-dropdown-toggle-ref aria-expanded="false"
-                        data-te-ripple-init data-te-ripple-color="light">
+                        type="button" data-te-toggle="modal" data-te-target="#exampleModalCenter" data-te-ripple-init
+                        data-te-ripple-color="light" @click="showFiltersModal">
                         Filtros
-                        <span class="ml-2 w-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
-                                <path fill-rule="evenodd"
-                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </span>
                     </a>
-                    <ul class="absolute z-[1000] float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg
-                        border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700
-                        [&[data-te-dropdown-show]]:block" aria-labelledby="dropdownMenuButton1"
-                        data-te-dropdown-menu-ref>
-                        <li>
-                            <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
-                                data-te-dropdown-item-ref>Género</a>
-                        </li>
-                        <li>
-                            <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
-                                data-te-dropdown-item-ref>Duración</a>
-                        </li>
-                        <li>
-                            <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
-                                data-te-dropdown-item-ref>Entidad</a>
-                        </li>
-                    </ul>
                 </div>
+
             </div>
 
             <div>
-                <div id="datatable" data-te-selectable="true" data-te-multi="true">></div>
+                <div id="datatable" data-te-selectable="true" data-te-multi="true"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para configurar los filtros -->
+    <div data-te-modal-init
+        class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+        id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
+        <div data-te-modal-dialog-ref
+            class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
+            <div
+                class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+                <div
+                    class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+                    <!-- Modal title -->
+                    <h5 class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
+                        id="exampleModalCenterTitle">
+                        Filtrar canciones
+                    </h5>
+                    <!-- Close button -->
+                    <button type="button"
+                        class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                        data-te-modal-dismiss aria-label="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="relative p-4">
+                    <!-- Sección de géneros -->
+                    <div class="mb-4">
+                        <h6 class="text-lg font-medium mb-2">Géneros</h6>
+                        <select id="selectGeneros" ref="generosSelect" data-te-select-init multiple
+                            class="w-full border rounded p-2">
+                            <option v-for="genero in generos" :value="genero.id" :key="genero.id">{{ genero.nombre }}
+                            </option>
+                        </select>
+
+                    </div>
+
+                    <!-- Sección de grupos -->
+                    <div class="mb-4">
+                        <h6 class="text-lg font-medium mb-2">Artistas</h6>
+                        <select id="selectEntidades" ref="gruposSelect" data-te-select-init multiple
+                            class="w-full border rounded p-2">
+                            <option v-for="entidad in entidades" :value="entidad.id" :key="entidad.id">{{ entidad.nombre }}
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div
+                    class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+                    <button type="button"
+                        class="inline-block rounded bg-pink-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
+                        data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light">
+                        Cerrar
+                    </button>
+                    <button type="button"
+                        class="ml-1 inline-block rounded bg-pink-500 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                        data-te-ripple-init data-te-ripple-color="light" @click="actualizarTablaConFiltros">
+                        Guardar filtros
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -87,11 +133,17 @@ export default {
             canciones: [],
             isLoggedIn: false,
             accessToken: null,
+            generos: [],
+            entidades: [],
+            filtros: {
+                generos: [],
+                entidades: [],
+            },
         };
     },
     mounted() {
         const accessTokenFromURL = window.location.hash.substr(1).split('&')[0].split('=')[1];
-
+        this.showFiltersModal();
         if (accessTokenFromURL) {
             this.accessToken = accessTokenFromURL;
             this.isLoggedIn = true;
@@ -101,9 +153,89 @@ export default {
         } else {
             this.fetchCanciones();
         }
-    }
-    ,
+    },
     methods: {
+
+        async showFiltersModal() {
+            // Cuando se muestra el modal de filtros, obtén los géneros y las entidades
+            this.generos = await this.fetchAllGenerosNames();
+            this.entidades = await this.fetchAllEntidadesNames();
+        },
+
+
+        async actualizarTablaConFiltros() {
+            try {
+                const selectGeneros = document.querySelector("#selectGeneros");
+                const selectEntidades = document.querySelector("#selectEntidades");
+
+                // Guarda los filtros seleccionados en el objeto filtros
+                const generosSeleccionados = Array.from(selectGeneros.selectedOptions).map(opcion => opcion.value);
+                const entidadesSeleccionadas = Array.from(selectEntidades.selectedOptions).map(opcion => opcion.value);
+
+                console.log('EntidadesIDS:', entidadesSeleccionadas);
+                console.log('GenerosIDS:', generosSeleccionados);
+
+                const response = await axios.get('http://localhost:8000/api/editorial/canciones/', {
+                    params: {
+                        'entidades[]': entidadesSeleccionadas,
+                        'generos[]': generosSeleccionados,
+                    },
+                });
+
+                console.log('URL de la solicitud:', response.config.url);
+
+                // Procesa los datos obtenidos del servidor
+                const canciones = await Promise.all(response.data.map(async (cancion) => {
+                    await this.fetchEntidadName(cancion);
+                    await this.fetchGeneroNames(cancion);
+
+                    const botonEscuchar = `<button class="btn-escuchar animate-fade-in" data-id="${cancion.idSpotify}"></button>`;
+
+                    return {
+                        cancion: cancion.nombre,
+                        artista: cancion.entidadNombre,
+                        genero: cancion.generoNombres.join(', '),
+                        duracion: cancion.duracion,
+                        escucha: botonEscuchar,
+                    };
+                }));
+
+                // Actualiza la tabla con los datos filtrados
+                const columns = [
+                    { label: "Canción", field: "cancion" },
+                    { label: "Artista", field: "artista" },
+                    { label: "Género", field: "genero" },
+                    { label: "Duración", field: "duracion" },
+                    { label: "Escucha", field: "escucha", sort: false },
+                ];
+
+                const data = {
+                    columns,
+                    rows: canciones,
+                };
+
+                this.initDataTable(data);
+
+                // Asegúrate de volver a agregar el evento click al botón de escucha después de actualizar la tabla
+                const tableContainer = document.getElementById('datatable');
+                tableContainer.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('btn-escuchar')) {
+                        const idSpotify = target.getAttribute('data-id');
+                        if (!this.isLoggedIn) {
+                            console.error('Iniciar sesión en Spotify');
+                        } else if (idSpotify) {
+                            console.log('ID de SPOTIFY: ' + idSpotify);
+                            this.reproducirCancion(idSpotify);
+                        } else {
+                            console.error('ID de Spotify es nulo o indefinido');
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching canciones:', error);
+            }
+        },
 
         async getSpotifyEmbedUrl(accessToken) {
             console.log('Access Token:', accessToken);
@@ -297,6 +429,52 @@ export default {
                 console.error('Error fetching géneros:', error);
                 cancion.generoNombres = []; // Asignar un arreglo vacío en caso de error
             }
+        },
+
+        async fetchAllGenerosNames() {
+            let allGeneros = []; // Inicializar lista de géneros
+
+            try {
+                // Obtén los géneros desde la API de Django
+                const generoResponse = await axios.get('http://localhost:8000/api/editorial/generos/');
+
+                // Verificar si los datos se recibieron correctamente
+                if (generoResponse.status === 200) {
+                    // Asigna los nombres de los géneros a la lista allGeneros
+                    allGeneros = generoResponse.data.map(genero => genero);
+                } else {
+                    console.error('Error al obtener los géneros:', generoResponse.statusText);
+                }
+            } catch (error) {
+                console.error('Error al obtener los géneros:', error);
+                // Asignar un arreglo vacío en caso de error
+                allGeneros = [];
+            }
+            // Devuelve la lista de nombres de géneros
+            return allGeneros;
+        },
+
+        async fetchAllEntidadesNames() {
+            let allEntidades = []; // Inicializar lista de géneros
+
+            try {
+                // Obtén los géneros desde la API de Django
+                const entidadResponse = await axios.get('http://localhost:8000/api/editorial/entidades/');
+
+                // Verificar si los datos se recibieron correctamente
+                if (entidadResponse.status === 200) {
+                    // Asigna los nombres de los géneros a la lista allGeneros
+                    allEntidades = entidadResponse.data.map(entidad => entidad);
+                } else {
+                    console.error('Error al obtener las entidades:', entidadResponse.statusText);
+                }
+            } catch (error) {
+                console.error('Error al obtener las entidades:', error);
+                // Asignar un arreglo vacío en caso de error
+                allEntidades = [];
+            }
+            // Devuelve la lista de nombres de géneros
+            return allEntidades;
         },
 
     },
