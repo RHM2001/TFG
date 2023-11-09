@@ -44,6 +44,11 @@
                 <div id="datatable" data-te-selectable="true" data-te-multi="true"></div>
             </div>
         </div>
+
+        <div v-if="!isSongSelect" class="relative flex flex-wrap center py-2">
+            <button type="button"
+                class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Contactar</button>
+        </div>
     </div>
 
     <!-- Modal para configurar los filtros -->
@@ -98,19 +103,35 @@
                 </div>
 
                 <!-- Modal footer -->
+
                 <div
-                    class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-                    <button type="button"
-                        class="inline-block rounded bg-pink-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
-                        data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light">
-                        Cerrar
-                    </button>
-                    <button type="button"
-                        class="ml-1 inline-block rounded bg-pink-500 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                        data-te-ripple-init data-te-ripple-color="light" @click="actualizarTablaConFiltros">
-                        Guardar filtros
-                    </button>
+                    class="flex items-center justify-between rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+
+                    <div class="flex items-center space-x-4">
+                        <button type="button"
+                            class="inline-block rounded bg-slate-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
+                            data-te-ripple-init data-te-ripple-color="light" @click="limpiarFiltros">
+                            Limpiar
+                        </button>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <button type="button"
+                            class="inline-block rounded bg-pink-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
+                            data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light">
+                            Cerrar
+                        </button>
+
+                        <button type="button"
+                            class="inline-block rounded bg-pink-500 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                            data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light"
+                            @click="actualizarTablaConFiltros">
+                            Guardar filtros
+                        </button>
+                    </div>
+
                 </div>
+
             </div>
         </div>
     </div>
@@ -121,11 +142,13 @@ import axios from 'axios';
 
 import {
     Datatable,
+    Select,
     initTE,
 } from "tw-elements";
 
-initTE({ Datatable });
 
+initTE({ Datatable });
+initTE({ Select });
 
 export default {
     data() {
@@ -162,6 +185,30 @@ export default {
             this.entidades = await this.fetchAllEntidadesNames();
         },
 
+        async limpiarFiltros() {
+
+            var select1 = document.querySelector("#selectGeneros");
+            var options1 = select1.options;
+
+            for (var i = 0; i < options1.length; i++) {
+                if (options1[i].selected) {
+                    options1[i].selected = false;
+                }
+            }
+
+            select1.value = "";
+
+            var select2 = document.querySelector("#selectEntidades");
+            var options2 = select2.options;
+
+            for (var i = 0; i < options2.length; i++) {
+                if (options2[i].selected) {
+                    options2[i].selected = false;
+                }
+            }
+
+            select2.value = "";
+        },
 
         async actualizarTablaConFiltros() {
             try {
@@ -216,7 +263,6 @@ export default {
 
                 this.initDataTable(data);
 
-                // Asegúrate de volver a agregar el evento click al botón de escucha después de actualizar la tabla
                 const tableContainer = document.getElementById('datatable');
                 tableContainer.addEventListener('click', (event) => {
                     const target = event.target;
@@ -239,7 +285,7 @@ export default {
 
         async getSpotifyEmbedUrl(accessToken) {
             console.log('Access Token:', accessToken);
-            await this.$nextTick(); // Espera a que Vue haya renderizado el componente
+            await this.$nextTick();
             const iframeElement = document.getElementById('spotify-iframe');
             console.log('Iframe Element:', iframeElement);
             if (iframeElement) {
