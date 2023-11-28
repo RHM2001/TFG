@@ -17,7 +17,7 @@
             <div
                class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[400ms] ease-in-out motion-reduce:transition-none"
                data-te-carousel-item style="backface-visibility: hidden">
-               <img src="https://th.bing.com/th/id/R.6d7f22c16fc546f63c0a8336f3dbf471?rik=%2bIWQcYwyvo54kQ&riu=http%3a%2f%2fartmusicagency.es%2fimages%2fnunatak.jpg&ehk=jqMpnzLckRt0x7Ras4XEmH5XEEJEE6bQGNXJnXKrFKk%3d&risl=&pid=ImgRaw&r=0"
+               <img src="https://verdaderalocura.com/wp-content/uploads/2019/09/NUNATAK-PPAL-750x430.jpg"
                   class="block w-full object-cover h-[1000px]" alt="..." />
 
             </div>
