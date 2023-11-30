@@ -262,7 +262,6 @@
 <script>
 
 import axios from 'axios';
-import $ from 'jquery';
 
 import {
     Datatable,
@@ -273,6 +272,8 @@ import {
 
 initTE({ Datatable });
 initTE({ Select });
+
+var filas_dataTable = null;
 
 export default {
     data() {
@@ -300,6 +301,11 @@ export default {
         } else {
             this.fetchCanciones();
         }
+        const datatable = document.getElementById('datatable');
+
+        datatable.addEventListener('selectRows.te.datatable', (e) => {
+            filas_dataTable = e.selectedRows;
+        })
     },
     methods: {
 
@@ -330,12 +336,7 @@ export default {
             const comentarios = document.querySelector("#comentariosAdicionales").value.trim();
             console.log("COMENTARIOS ADICIONALES: " + comentarios);
 
-            const dataTable = $('#datatable').Datatable;
-            const filasSeleccionadas = dataTable.rows;
-            
-            console.log(filasSeleccionadas);
-
-
+            console.log(filas_dataTable);
 
             // Verificar campos obligatorios
             if (!empresa || !contacto || !correo || !telefono || !ubicacion || !detalles || !presupuesto) {

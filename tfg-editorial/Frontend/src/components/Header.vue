@@ -60,9 +60,9 @@
                                 data-te-ripple-color="light">Conciertos</a>
                         </li>
                         <li class="mb-0 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                            <a class="block transition duration-150 ease-in-out hover:text-pink-600  focus:text-neutral-700 disabled:text-black/30 dark:hover:text-pink-600  lg:p-2 [&.active]:text-black/90"
+                            <router-link to="/administrador" class="block transition duration-150 ease-in-out hover:text-pink-600  focus:text-neutral-700 disabled:text-black/30 dark:hover:text-pink-600  lg:p-2 [&.active]:text-black/90"
                                 href="#!" data-te-nav-link-ref data-te-ripple-init
-                                data-te-ripple-color="light">Administrador </a>
+                                data-te-ripple-color="light">Administrador </router-link>
                         </li>
                     </ul>
                 </div>

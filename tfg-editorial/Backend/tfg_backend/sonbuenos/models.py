@@ -24,4 +24,15 @@ class Cancion (models.Model):
     fecha = models.DateField(null=True)
     idSpotify = models.CharField(max_length=50)
     entidad = models.ForeignKey(EntidadMusical, on_delete=models.CASCADE)
+
+class Solicitud (models.Model):
+    empresa = models.CharField(max_length=50)
+    contacto = models.CharField(max_length=50)
+    correo = models.CharField(max_length=50)
+    telefono = models.CharField(max_length=50)
+    ubicacion = models.CharField(max_length=50)
+    detalles = models.CharField(max_length=100)
+    presupuesto = models.CharField(max_length=50)
+    comentarios = models.CharField(max_length=50, null=True)
+    
     

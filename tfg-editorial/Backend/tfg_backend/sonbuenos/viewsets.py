@@ -15,6 +15,9 @@ from .serializer import ArtistaSerializer
 from .models import EntidadMusical
 from .serializer import EntidadMusicalSerializer
 
+from .models import Solicitud
+from .serializer import SolicitudSerializer
+
 class SonBuenosViewSet(viewsets.ModelViewSet):
     queryset = SonBuenos.objects.all()
     serializer_class = SonBuenosSerializer
@@ -39,7 +42,7 @@ class CancionViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(genero__id__in=generos_ids)
 
         return queryset
-  
+
 
 class ArtistaViewSet(viewsets.ModelViewSet):
     queryset = Artista.objects.all()
@@ -48,3 +51,7 @@ class ArtistaViewSet(viewsets.ModelViewSet):
 class EntidadMusicalViewSet(viewsets.ModelViewSet):
     queryset = EntidadMusical.objects.all()
     serializer_class = EntidadMusicalSerializer
+
+class SolicitudViewSet(viewsets.ModelViewSet):
+    queryset = Solicitud.objects.all()
+    serializer_class = SolicitudSerializer

@@ -3,6 +3,7 @@ from .models import Genero
 from .models import Cancion
 from .models import EntidadMusical
 from .models import Artista
+from .models import Solicitud
 from rest_framework import serializers
 
 class SonBuenosSerializer(serializers.ModelSerializer):
@@ -28,4 +29,9 @@ class EntidadMusicalSerializer(serializers.ModelSerializer):
 class ArtistaSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Artista
+        fields = '__all__'
+
+class SolicitudSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Solicitud
         fields = '__all__'
