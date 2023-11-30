@@ -29,7 +29,7 @@
                     id="navbarSupportedContentX" data-te-collapse-item>
 
                     <router-link to="/" class="animate-fade-in mb-4 ml-2 mr-5 mt-3">
-                        <img src="https://www.sonbuenos.com/wp-content/uploads/2019/06/logo-sonbuenos-2019-e1559813110801.png"
+                        <img src="public/images/logo-sonbuenos.png"
                             style="max-width: 110px; height: auto;" alt="Logo SonBuenos" />
                     </router-link>
 
