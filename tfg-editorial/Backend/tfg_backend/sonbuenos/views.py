@@ -3,7 +3,12 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 
+@api_view(['POST', 'OPTIONS'])
+@permission_classes([AllowAny])
 @csrf_exempt
 def login_view(request):
     error_message = None
@@ -26,8 +31,19 @@ def login_view(request):
         if user is not None:
             # Iniciar sesión si la autenticación fue exitosa
             login(request, user)
-            # Redirigir a la página deseada después del inicio de sesión
-            return JsonResponse({"detail": "Login successful"}, status=200)
+            
+            refresh = RefreshToken.for_user(user)
+            access_token = str(refresh.access_token)
+            refresh_token = str(refresh)
+
+            # Puedes devolver más información según tus necesidades
+            response_data = {
+                "detail": "Login successful",
+                "access_token": access_token,
+                "refresh_token": refresh_token,
+            }
+            
+            return JsonResponse(response_data, status=200)
         else:
             # Mostrar un mensaje de error si la autenticación falla
             error_message = "Usuario o contraseña incorrectos"
