@@ -1,5 +1,6 @@
 <template>
-    <h1 class="font-lara mt-6 text-white text-center" style="font-size: 40px">
+    
+    <h1 class="text-4xl font-medium leading-tight text-black text-center font-lara mt-6">
         Escudería de artistas
     </h1>
 
@@ -112,7 +113,7 @@
                 </div>
             </div>
 
-            
+
 
 
         </div>
@@ -141,7 +142,6 @@
 .block-artistas:hover img {
     opacity: 1;
 }
-
 </style>
 
 <script>
