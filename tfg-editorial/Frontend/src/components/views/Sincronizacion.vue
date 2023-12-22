@@ -290,6 +290,7 @@ export default {
         };
     },
     mounted() {
+        axios.defaults.headers.common['Authorization'] = null; 
         const accessTokenFromURL = window.location.hash.substr(1).split('&')[0].split('=')[1];
         this.showFiltersModal();
         if (accessTokenFromURL) {
