@@ -29,7 +29,7 @@
                     id="navbarSupportedContentX" data-te-collapse-item>
 
                     <router-link to="/" class="animate-fade-in mb-4 ml-2 mr-5 mt-3">
-                        <img src="public/images/logo-sonbuenos.png"
+                        <img src="../../public/images/logo-sonbuenos.png"
                             style="max-width: 110px; height: auto;" alt="Logo SonBuenos" />
                     </router-link>
 

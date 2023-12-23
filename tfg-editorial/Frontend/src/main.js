@@ -7,12 +7,14 @@ import Home from './components/views/Home.vue';
 import Artistas from './components/views/Artistas.vue';
 import Sincronizacion from './components/views/Sincronizacion.vue';
 import Administrador from './components/views/Administrador.vue';
+import Canciones from './components/views/Canciones.vue';
 
 const routes = [
     { path: '/', name: 'home', component: Home },
     { path: '/artistas', name: 'artistas', component: Artistas },
     { path: '/sincronizacion', name: 'sincronizacion', component: Sincronizacion },
-    { path: '/Administrador', name: 'Administrador', component: Administrador },
+    { path: '/administrador', name: 'administrador', component: Administrador },
+    { path: '/administrador/canciones', name: 'canciones', component: Canciones },
 ];
 
 const router = createRouter({

@@ -558,7 +558,9 @@ export default {
             const tableElement = document.getElementById('datatable');
             tableElement.innerHTML = '';
 
-            const instance = new Datatable(document.getElementById('datatable'), data);
+            const instance = new Datatable(document.getElementById('datatable'), data, {
+                hover: true,    
+            });
 
             document.getElementById('datatable-search-input').addEventListener('input', (e) => {
                 instance.search(e.target.value);
@@ -742,7 +744,7 @@ export default {
 }
 
 .btn-escuchar {
-    background-image: url('public/images/boton-de-play.png');
+    background-image: url('../../public/images/boton-de-play.png');
     /* Ruta de la imagen */
     background-size: cover;
     /* Ajusta el tamaño de la imagen para cubrir completamente el botón */

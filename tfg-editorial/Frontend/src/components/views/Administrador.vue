@@ -40,103 +40,116 @@
 
     <div v-else>
 
+        <h1 class="text-4xl font-medium leading-tight text-black text-center font-lara mt-6">
+            Panel de administración
+        </h1>
+
         <div class="container mx-auto px-5 py-12 lg:px-32 lg:pt-12">
-
-
-            <h1 class="mb-6 text-4xl font-medium leading-tight text-black text-center font-lara">
-                Panel de administración
-            </h1>
-
 
             <div class="flex flex-wrap justify-center">
 
                 <div class="flex justify-between">
                     <!-- Parte Izquierda -->
                     <div class="w-1/3">
-                        <div
-                            class="flex flex-wrap items-center justify-center block-edit border border-neutral-300 rounded-lg max-w-[18rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 animate-fade-in">
+                        <a href="/administrador/generos">
+                            <div
+                                class="flex flex-wrap items-center justify-center block-edit border border-neutral-300 rounded-lg max-w-[18rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 animate-fade-in">
 
-                            <div class="flex items-center justify-center mt-6">
-                                <img class="rounded-t-lg" src="public/images/disco-de-vinilo.png" />
+                                <div class="flex items-center justify-center mt-6">
+                                    <img class="rounded-t-lg" src="public/images/disco-de-vinilo.png" />
+                                </div>
+                                <div class="p-6">
+                                    <h5
+                                        class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                                        Generos
+                                    </h5>
+                                    <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                                        Generos introducidos en la base de datos del sistema.
+                                    </p>
+                                </div>
                             </div>
-                            <div class="p-6">
-                                <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                                    Generos
-                                </h5>
-                                <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                                    Generos introducidos en la base de datos del sistema.
-                                </p>
-                            </div>
-                        </div>
+                        </a>
 
-                        <div
-                            class="flex flex-wrap items-center justify-center block-edit border border-neutral-300 rounded-lg max-w-[18rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 animate-fade-in">
-                            <div class="flex items-center justify-center mt-6">
-                                <img class="rounded-t-lg" src="public/images/lista-de-musica.png" />
+                        <a href="/administrador/canciones">
+                            <div
+                                class="flex flex-wrap items-center justify-center block-edit border border-neutral-300 rounded-lg max-w-[18rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 animate-fade-in">
+                                <div class="flex items-center justify-center mt-6">
+                                    <img class="rounded-t-lg" src="public/images/lista-de-musica.png" />
+                                </div>
+                                <div class="p-6">
+                                    <h5
+                                        class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                                        Canciones
+                                    </h5>
+                                    <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                                        Canciones guardadas en la base de datos del sistema.
+                                    </p>
+                                </div>
                             </div>
-                            <div class="p-6">
-                                <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                                    Canciones
-                                </h5>
-                                <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                                    Canciones guardadas en la base de datos del sistema.
-                                </p>
-                            </div>
-                        </div>
+                        </a>
 
                     </div>
 
                     <!-- Parte Centro -->
                     <div class="w-1/3 flex items-center">
-                        <div
-                            class="flex flex-wrap items-center justify-center block-edit border border-neutral-300 rounded-lg max-w-[18rem]  bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 animate-fade-in    ">
-                            <div class="flex items-center justify-center mt-6">
-                                <img class="rounded-t-lg" src="public/images/sobre.png" />
+                        <a href="/administrador/solicitudes">
+                            <div
+                                class="flex flex-wrap items-center justify-center block-edit border border-neutral-300 rounded-lg max-w-[18rem]  bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 animate-fade-in    ">
+                                <div class="flex items-center justify-center mt-6">
+                                    <img class="rounded-t-lg" src="public/images/sobre.png" />
+                                </div>
+                                <div class="p-6">
+                                    <h5
+                                        class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                                        Solicitudes de sincronización
+                                    </h5>
+                                    <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                                        Gestionar solicitudes de sincronización recibidas.
+                                    </p>
+                                </div>
                             </div>
-                            <div class="p-6">
-                                <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                                    Solicitudes de sincronización
-                                </h5>
-                                <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                                    Gestionar solicitudes de sincronización recibidas.
-                                </p>
-                            </div>
-                        </div>
+                        </a>
                     </div>
+
 
 
 
                     <!-- Parte Derecha -->
                     <div class="w-1/3">
-                        <div
-                            class="flex flex-wrap items-center justify-center block-edit border border-neutral-300 rounded-lg max-w-[18rem]  bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 animate-fade-in">
-                            <div class="flex items-center justify-center mt-6">
-                                <img class="rounded-t-lg" src="public/images/entidades.png" />
+                        <a href="/administrador/entidades-musicales">
+                            <div
+                                class="flex flex-wrap items-center justify-center block-edit border border-neutral-300 rounded-lg max-w-[18rem]  bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 animate-fade-in">
+                                <div class="flex items-center justify-center mt-6">
+                                    <img class="rounded-t-lg" src="public/images/entidades.png" />
+                                </div>
+                                <div class="p-6">
+                                    <h5
+                                        class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                                        Entidades musicales
+                                    </h5>
+                                    <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                                        Entidades musicales en la base de datos del sistema.
+                                    </p>
+                                </div>
                             </div>
-                            <div class="p-6">
-                                <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                                    Entidades musicales
-                                </h5>
-                                <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                                    Entidades musicales en la base de datos del sistema.
-                                </p>
+                        </a>
+                        <a href="/administrador/artistas">
+                            <div
+                                class="flex flex-wrap items-center justify-center block-edit border border-neutral-300 rounded-lg max-w-[18rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 animate-fade-in">
+                                <div class="flex items-center justify-center mt-6">
+                                    <img class="rounded-t-lg" src="public/images/musica-de-usuario.png" />
+                                </div>
+                                <div class="p-6">
+                                    <h5
+                                        class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                                        Artistas
+                                    </h5>
+                                    <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                                        Artistas de la base de datos del sistema.
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-
-                        <div
-                            class="flex flex-wrap items-center justify-center block-edit border border-neutral-300 rounded-lg max-w-[18rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 animate-fade-in">
-                            <div class="flex items-center justify-center mt-6">
-                                <img class="rounded-t-lg" src="public/images/musica-de-usuario.png" />
-                            </div>
-                            <div class="p-6">
-                                <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                                    Artistas
-                                </h5>
-                                <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                                    Artistas de la base de datos del sistema.
-                                </p>
-                            </div>
-                        </div>
+                        </a>
 
                     </div>
 
@@ -220,5 +233,4 @@ export default {
     margin-bottom: 20px;
     margin-right: 20px;
     transition: transform 0.2s ease-in-out;
-}
-</style>
+}</style>

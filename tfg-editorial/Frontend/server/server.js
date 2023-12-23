@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 
 
 app.get('/login', (req, res) => {
-    const scopes = 'user-read-private user-read-email'; // Agrega los permisos que necesites
+    const scopes = 'user-read-private user-read-email';
     res.redirect(`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirectUri)}`);
 });
 
