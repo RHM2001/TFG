@@ -120,20 +120,20 @@
     </div>
 
 
-    <!-- Modal -->
+    <!--Vertically centered modal-->
     <div data-te-modal-init
         class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-        id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        id="modalEditar" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
         <div data-te-modal-dialog-ref
-            class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]">
+            class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
             <div
-                class="min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+                class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
                 <div
                     class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
                     <!--Modal title-->
                     <h5 class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
-                        id="exampleModalLabel">
-                        Modal title
+                        id="exampleModalCenterTitle">
+                        Cancion:
                     </h5>
                     <!--Close button-->
                     <button type="button"
@@ -147,22 +147,93 @@
                 </div>
 
                 <!--Modal body-->
-                <div class="relative flex-auto p-4" data-te-modal-body-ref>
-                    Modal body text goes here.
+                <div class="relative overflow-y-auto p-4">
+
+                    <div class="relative mb-4 flex flex-stretch items-stretch">
+                        <span
+                            class="flex items-center whitespace-nowrap rounded-l border border-r-0 border-solid border-neutral-300 px-3 py-[0.25rem] text-center text-base font-normal leading-[1.6] text-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
+                            id="inputGroup-sizing-default">Canción</span>
+                        <input type="text"
+                            class="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                            id="input-cancion" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" v-model="cancionModal.nombre" />
+                    </div>
+
+                    <div class="relative mb-4 flex flex-stretch items-stretch">
+                        <span
+                            class="flex items-center whitespace-nowrap rounded-l border border-r-0 border-solid border-neutral-300 px-3 py-[0.25rem] text-center text-base font-normal leading-[1.6] text-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
+                            id="inputGroup-sizing-default">Artista</span>
+                        <input type="text"
+                            class="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                            id="input-artista" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" v-model="cancionModal.artista"/>
+                    </div>
+
+                    <div class="relative mb-4 flex flex-stretch items-stretch">
+                        <span
+                            class="flex items-center whitespace-nowrap rounded-l border border-r-0 border-solid border-neutral-300 px-3 py-[0.25rem] text-center text-base font-normal leading-[1.6] text-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
+                            id="inputGroup-sizing-default">Género</span>
+                        <input type="text"
+                            class="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                            id="input-genero" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                            v-model="cancionModal.genero" />
+                    </div>
+
+                    <div class="relative mb-4 flex flex-stretch items-stretch">
+                        <span
+                            class="flex items-center whitespace-nowrap rounded-l border border-r-0 border-solid border-neutral-300 px-3 py-[0.25rem] text-center text-base font-normal leading-[1.6] text-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
+                            id="inputGroup-sizing-default">Duración</span>
+                        <input type="text"
+                            class="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                            id="input-duracion" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" v-model="cancionModal.duracion" />
+                    </div>
+
+                    <div class="relative mb-4 flex flex-stretch items-stretch">
+                        <span
+                            class="flex items-center whitespace-nowrap rounded-l border border-r-0 border-solid border-neutral-300 px-3 py-[0.25rem] text-center text-base font-normal leading-[1.6] text-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
+                            id="inputGroup-sizing-default">Fecha</span>
+                        <input type="text"
+                            class="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                            id="input-url" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                            v-model="cancionModal.fecha" />
+                    </div>
+
+                    <div class="relative mb-4 flex flex-stretch items-stretch">
+                        <span
+                            class="flex items-center whitespace-nowrap rounded-l border border-r-0 border-solid border-neutral-300 px-3 py-[0.25rem] text-center text-base font-normal leading-[1.6] text-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
+                            id="inputGroup-sizing-default">Url</span>
+                        <input type="text"
+                            class="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                            id="input-url" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                            v-model="cancionModal.url" />
+                    </div>
+
+                    <div class="relative mb-4 flex flex-stretch items-stretch">
+                        <span
+                            class="flex items-center whitespace-nowrap rounded-l border border-r-0 border-solid border-neutral-300 px-3 py-[0.25rem] text-center text-base font-normal leading-[1.6] text-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
+                            id="inputGroup-sizing-default">Spotify</span>
+                        <input type="text"
+                            class="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                            id="input-spotify" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" v-model="cancionModal.spotify" />
+                    </div>
+
                 </div>
+
 
                 <!--Modal footer-->
                 <div
                     class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
                     <button type="button"
-                        class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
+                        class="inline-block rounded bg-danger-500 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
                         data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light">
-                        Close
+                        Revertir
                     </button>
                     <button type="button"
-                        class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                        class="ml-1 inline-block rounded bg-success px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                         data-te-ripple-init data-te-ripple-color="light">
-                        Save changes
+                        Guardar cambios
                     </button>
                 </div>
             </div>
@@ -185,6 +256,15 @@ export default {
             filtros: {
                 generos: [],
                 entidades: [],
+            },
+            cancionModal: {
+                nombre: '',
+                artista: '',
+                genero: '',
+                fecha: '',
+                duracion: '',
+                url: '',
+                spotify: ''
             },
         };
     },
@@ -294,7 +374,7 @@ export default {
                     await this.fetchEntidadName(cancion);
                     await this.fetchGeneroNames(cancion);
 
-                    const botonEditar = `<button class="btn-editar" data-te-toggle="modal" data-te-target="#exampleModal" data-id="${cancion.id}"></button>`;
+                    const botonEditar = `<button class="btn-editar" data-te-toggle="modal" data-te-target="#modalEditar" data-id="${cancion.id}"></button>`;
 
                     return {
                         cancion: cancion.nombre,
@@ -327,6 +407,15 @@ export default {
                 };
 
                 this.initDataTable(data);
+
+                const tableContainer = document.getElementById('datatable');
+                tableContainer.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('btn-editar')) {
+                        const idCancion = target.getAttribute('data-id');
+                        this.cambiarInfoModal(idCancion);
+                    }
+                });
 
             } catch (error) {
                 console.error('Error fetching canciones:', error);
@@ -367,17 +456,6 @@ export default {
 
             const instance = new Datatable(document.getElementById('datatable'), data, {
                 hover: true,
-            });
-
-            // Agregar un manejador de eventos clic para las filas de la tabla
-            tableElement.addEventListener('click', async (event) => {
-                const targetRow = event.target.closest('tr'); // Encuentra la fila más cercana al elemento clicado
-
-                if (targetRow) {
-                    const rowData = Array.from(targetRow.children).map((td) => td.innerText.trim());
-                    this.handleRowClick(rowData);
-                    console.log('Fila clicada:', rowData);
-                }
             });
 
             document.getElementById('datatable-search-input').addEventListener('input', (e) => {
@@ -429,6 +507,28 @@ export default {
             }
             // Devuelve la lista de nombres de géneros
             return allEntidades;
+        },
+
+        async cambiarInfoModal(idCancion) {
+            try {
+                const response = await axios.get(`http://localhost:8000/api/editorial/canciones/${idCancion}`);
+                const cancion = response.data;
+
+                await this.fetchEntidadName(cancion);
+                await this.fetchGeneroNames(cancion);
+
+                this.cancionModal.nombre = cancion.nombre;
+                this.cancionModal.artista = cancion.entidad;
+                this.cancionModal.genero = cancion.genero;
+                this.cancionModal.fecha = cancion.fecha;
+                this.cancionModal.duracion = cancion.duracion;
+                this.cancionModal.url = cancion.url;
+                this.cancionModal.spotify = cancion.idSpotify;
+
+            } catch (error) {
+                console.error('Error fetching canciones:', error);
+            }
+
         },
 
     }

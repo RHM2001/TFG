@@ -10,7 +10,7 @@
                     <img src="public/images/spotify_icon_32.png" alt="Descripción de la imagen" class="button-image">
                     Login
                 </button>
-                <span class="flex items-center whitespace-nowrap">Iniciar sesión para escuchar las canciones.</span>
+                <span class="flex items-center font-lara whitespace-nowrap text-2xl">Iniciar sesión para escuchar las canciones.</span>
             </div>
 
             <iframe id="spotify-iframe" v-if="accessToken" style="border-radius:12px" width="100%" height="152"
