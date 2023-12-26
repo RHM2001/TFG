@@ -34,5 +34,7 @@ class Solicitud (models.Model):
     detalles = models.CharField(max_length=100)
     presupuesto = models.CharField(max_length=50)
     comentarios = models.CharField(max_length=50, null=True)
+    tratado = models.BooleanField(default=False) 
+    
     
     

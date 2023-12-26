@@ -10,7 +10,8 @@
                     <img src="public/images/spotify_icon_32.png" alt="Descripción de la imagen" class="button-image">
                     Login
                 </button>
-                <span class="flex items-center font-lara whitespace-nowrap text-2xl">Iniciar sesión para escuchar las canciones.</span>
+                <span class="flex items-center font-lara whitespace-nowrap text-2xl">Iniciar sesión para escuchar las
+                    canciones.</span>
             </div>
 
             <iframe id="spotify-iframe" v-if="accessToken" style="border-radius:12px" width="100%" height="152"
@@ -49,7 +50,8 @@
 
         <div v-if="!isSongSelect" class="relative flex flex-wrap center py-2">
             <button type="button" data-te-toggle="modal" data-te-target="#modalContacto" data-te-ripple-init
-                class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Contactar</button>
+                class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Contactar
+                para sincronización</button>
         </div>
     </div>
 
@@ -269,7 +271,6 @@ import {
     initTE,
 } from "tw-elements";
 
-
 initTE({ Datatable });
 initTE({ Select });
 
@@ -290,7 +291,7 @@ export default {
         };
     },
     mounted() {
-        axios.defaults.headers.common['Authorization'] = null; 
+        axios.defaults.headers.common['Authorization'] = null;
         const accessTokenFromURL = window.location.hash.substr(1).split('&')[0].split('=')[1];
         this.showFiltersModal();
         if (accessTokenFromURL) {
@@ -360,6 +361,28 @@ export default {
   Hay que completar todos los campos excepto el opcional.
 </div>`;
 
+            }
+
+            try {
+
+                const datosSolicitud = {
+                    empresa,
+                    contacto,
+                    correo,
+                    telefono,
+                    ubicacion,
+                    detalles,
+                    presupuesto,
+                    comentarios
+                };
+
+                const response = await axios.post(`http://localhost:8000/api/editorial/solicitudes/`, datosSolicitud);
+
+                console.log('Solicitud enviada:', response.data);
+
+
+            } catch (error) {
+                console.error('Error al modificar la canción:', error);
             }
         },
 
@@ -559,7 +582,7 @@ export default {
             tableElement.innerHTML = '';
 
             const instance = new Datatable(document.getElementById('datatable'), data, {
-                hover: true,    
+                hover: true,
             });
 
             document.getElementById('datatable-search-input').addEventListener('input', (e) => {

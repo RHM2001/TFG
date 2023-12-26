@@ -8,6 +8,7 @@ import Artistas from './components/views/Artistas.vue';
 import Sincronizacion from './components/views/Sincronizacion.vue';
 import Administrador from './components/views/Administrador.vue';
 import Canciones from './components/views/Canciones.vue';
+import Solicitudes from './components/views/Solicitudes.vue';
 
 const routes = [
     { path: '/', name: 'home', component: Home },
@@ -15,6 +16,7 @@ const routes = [
     { path: '/sincronizacion', name: 'sincronizacion', component: Sincronizacion },
     { path: '/administrador', name: 'administrador', component: Administrador },
     { path: '/administrador/canciones', name: 'canciones', component: Canciones },
+    { path: '/administrador/solicitudes', name: 'solicitudes', component: Solicitudes },
 ];
 
 const router = createRouter({
