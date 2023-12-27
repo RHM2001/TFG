@@ -32,7 +32,7 @@
                 <div id="datatable"></div>
             </div>
 
-            <button type="button" data-te-toggle="modal"  data-te-target="#modalCrear"
+            <button type="button" data-te-toggle="modal" data-te-target="#modalCrear"
                 class="inline-block rounded bg-success px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#14a44d] transition duration-150 ease-in-out hover:bg-success-600 hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] focus:bg-success-600 focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] focus:outline-none focus:ring-0 active:bg-success-700 active:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(20,164,77,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)]">
                 Añadir canción
             </button>
@@ -285,7 +285,7 @@
                         <input type="text"
                             class="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                             id="input-cancion" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default" v-model="cancionModal.nombre" />
+                            aria-describedby="inputGroup-sizing-default" v-model="cancionModalNuevo.nombre" />
                     </div>
 
                     <div class="relative mb-4 flex flex-stretch items-stretch">
@@ -304,7 +304,7 @@
                             class="flex items-center whitespace-nowrap rounded-l border border-r-0 border-solid border-neutral-300 px-3 py-[0.25rem] text-center text-base font-normal leading-[1.6] text-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
                             id="inputGroup-sizing-default">Género</span>
                         <select id="selectGeneros" ref="generosSelect" data-te-select-init multiple
-                            class="w-full border rounded p-2 flex-auto" v-model="cancionModal.genero">
+                            class="w-full border rounded p-2 flex-auto" v-model="cancionModalNuevo.genero">
                             <option v-for="genero in generos" :value="genero.id" :key="genero.id">{{ genero.nombre }}
                             </option>
                         </select>
@@ -318,7 +318,7 @@
                         <input type="text"
                             class="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                             id="input-duracion" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default" v-model="cancionModal.duracion" />
+                            aria-describedby="inputGroup-sizing-default" v-model="cancionModalNuevo.duracion" />
                     </div>
 
                     <div class="relative mb-4 flex flex-stretch items-stretch">
@@ -328,7 +328,7 @@
                         <input type="text"
                             class="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                             id="input-url" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-                            v-model="cancionModal.fecha" />
+                            v-model="cancionModalNuevo.fecha" />
                     </div>
 
                     <div class="relative mb-4 flex flex-stretch items-stretch">
@@ -338,7 +338,7 @@
                         <input type="text"
                             class="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                             id="input-url" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-                            v-model="cancionModal.url" />
+                            v-model="cancionModalNuevo.url" />
                     </div>
 
                     <div class="relative mb-4 flex flex-stretch items-stretch">
@@ -348,7 +348,7 @@
                         <input type="text"
                             class="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                             id="input-spotify" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default" v-model="cancionModal.spotify" />
+                            aria-describedby="inputGroup-sizing-default" v-model="cancionModalNuevo.spotify" />
                     </div>
 
                 </div>
@@ -394,6 +394,16 @@ export default {
                 entidades: [],
             },
             cancionModal: {
+                id: '',
+                nombre: '',
+                entidad: '',
+                genero: [],
+                fecha: '',
+                duracion: '',
+                url: '',
+                spotify: ''
+            },
+            cancionModalNuevo: {
                 id: '',
                 nombre: '',
                 entidad: '',
@@ -566,7 +576,7 @@ export default {
         async fetchEntidadName(cancion) {
             try {
                 const entidadResponse = await axios.get(`http://localhost:8000/api/editorial/entidades/${cancion.entidad}/`);
-                cancion.entidadNombre = entidadResponse.data.nombre; // Almacena el nombre de la entidad en entidadNombre
+                cancion.entidadNombre = entidadResponse.data.nombre;
             } catch (error) {
                 console.error('Error fetching entidad:', error);
             }
@@ -651,6 +661,11 @@ export default {
         },
 
         async cambiarInfoModal(idCancion) {
+            console.log('Antes de vaciar:', this.cancionModal);
+            Object.keys(this.cancionModal).forEach(key => {
+                this.cancionModal[key] = '';
+            });
+            console.log('Después de vaciar:', this.cancionModal);
             try {
                 const response = await axios.get(`http://localhost:8000/api/editorial/canciones/${idCancion}`);
                 const cancion = response.data;
@@ -675,7 +690,6 @@ export default {
 
         async modificarCancion() {
             try {
-                // Obtener los valores de los campos del formulario desde cancionModal
                 const id = this.cancionModal.id;
                 const nombre = this.cancionModal.nombre;
                 const entidad = this.cancionModal.entidad;
@@ -715,17 +729,16 @@ export default {
 
         async nuevaCancion() {
             try {
-                // Obtener los valores de los campos del formulario desde cancionModal
-                const nombre = this.cancionModal.nombre;
+                const nombre = this.cancionModalNuevo.nombre;
                 const entidad = this.cancionModal.entidad;
-                const duracion = this.cancionModal.duracion;
-                const fecha = this.cancionModal.fecha;
-                const url = this.cancionModal.url;
-                const idSpotify = this.cancionModal.spotify;
+                const duracion = this.cancionModalNuevo.duracion;
+                const fecha = this.cancionModalNuevo.fecha;
+                const url = this.cancionModalNuevo.url;
+                const idSpotify = this.cancionModalNuevo.spotify;
 
-                const generosSeleccionados = Array.from(this.cancionModal.genero);
+                const generosSeleccionados = Array.from(this.cancionModalNuevo.genero);
 
-                this.cancionModal.genero = generosSeleccionados;
+                this.cancionModalNuevo.genero = generosSeleccionados;
 
                 console.log('GenerosIDS:', generosSeleccionados);
 

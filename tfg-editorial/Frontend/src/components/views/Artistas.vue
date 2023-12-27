@@ -63,19 +63,6 @@
             <div
                 class="block-artistas max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
                 <div class="relative overflow-hidden bg-cover bg-no-repeat">
-                    <img class="rounded-t-lg" src="https://www.sonbuenos.com/wp-content/uploads/2023/04/04-1.jpg"
-                        alt="Foto Arde Bogota" />
-                </div>
-                <div class="p-2">
-                    <p class="text-center text-pink-800">
-                        María de Juan
-                    </p>
-                </div>
-            </div>
-
-            <div
-                class="block-artistas max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
-                <div class="relative overflow-hidden bg-cover bg-no-repeat">
                     <img class="rounded-t-lg" src="https://www.sonbuenos.com/wp-content/uploads/2023/04/Bengala-4-2.jpg"
                         alt="Foto Arde Bogota" />
                 </div>
@@ -98,23 +85,6 @@
                     </p>
                 </div>
             </div>
-
-            <div
-                class="block-artistas max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white animate-fade-in">
-                <div class="relative overflow-hidden bg-cover bg-no-repeat">
-                    <img class="rounded-t-lg"
-                        src="https://www.sonbuenos.com/wp-content/uploads/2023/04/foto-sephun-lowres.jpeg"
-                        alt="Foto Arde Bogota" />
-                </div>
-                <div class="p-2">
-                    <p class="text-center text-pink-800">
-                        Se ha perdidio un niño
-                    </p>
-                </div>
-            </div>
-
-
-
 
         </div>
     </div>

@@ -35,6 +35,7 @@ class Solicitud (models.Model):
     presupuesto = models.CharField(max_length=50)
     comentarios = models.CharField(max_length=50, null=True)
     tratado = models.BooleanField(default=False) 
+    canciones = models.ManyToManyField(Cancion, null=True)
     
     
     

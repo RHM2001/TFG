@@ -46,13 +46,11 @@
             <div>
                 <div id="datatable" data-te-selectable="true" data-te-multi="true"></div>
             </div>
-        </div>
-
-        <div v-if="!isSongSelect" class="relative flex flex-wrap center py-2">
             <button type="button" data-te-toggle="modal" data-te-target="#modalContacto" data-te-ripple-init
                 class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Contactar
                 para sincronización</button>
         </div>
+
     </div>
 
 
@@ -274,7 +272,7 @@ import {
 initTE({ Datatable });
 initTE({ Select });
 
-var filas_dataTable = null;
+var filas_dataTable;
 
 export default {
     data() {
@@ -312,58 +310,68 @@ export default {
     methods: {
 
         async enviarSolicitud() {
-            console.log("Argumentos de la solicitud:");
-
-            const empresa = document.querySelector("#nombreEmpresa").value.trim();
-            console.log("NOMBRE DE LA EMPRESA: " + empresa);
-
-            const contacto = document.querySelector("#nombreContacto").value.trim();
-            console.log("NOMBRE DE CONTACTO: " + contacto);
-
-            const correo = document.querySelector("#direccionCorreo").value.trim();
-            console.log("DIRECCION DE CORREO: " + correo);
-
-            const telefono = document.querySelector("#numeroTelefono").value.trim();
-            console.log("NUMERO DE TELEFONO: " + telefono);
-
-            const ubicacion = document.querySelector("#ubicacion").value.trim();
-            console.log("UBICACION: " + ubicacion);
-
-            const detalles = document.querySelector("#detallesProyecto").value.trim();
-            console.log("DETALLES DEL PROYECTO: " + detalles);
-
-            const presupuesto = document.querySelector("#presupuestoDisponible").value.trim();
-            console.log("PRESUPUESTO DISPONIBLE: " + presupuesto);
-
-            const comentarios = document.querySelector("#comentariosAdicionales").value.trim();
-            console.log("COMENTARIOS ADICIONALES: " + comentarios);
-
-            console.log(filas_dataTable);
-
-            // Verificar campos obligatorios
-            if (!empresa || !contacto || !correo || !telefono || !ubicacion || !detalles || !presupuesto) {
-                const alertContainer = document.querySelector("#alertContainer");
-                alertContainer.innerHTML = `<div
-  class="mb-3 inline-flex w-full items-center rounded-lg bg-danger-100 px-6 py-5 text-base text-danger-700"
-  role="alert">
-  <span class="mr-2">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      class="h-5 w-5">
-      <path
-        fill-rule="evenodd"
-        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
-        clip-rule="evenodd" />
-    </svg>
-  </span>
-  Hay que completar todos los campos excepto el opcional.
-</div>`;
-
-            }
-
             try {
+                const empresa = document.querySelector("#nombreEmpresa").value.trim();
+                const contacto = document.querySelector("#nombreContacto").value.trim();
+                const correo = document.querySelector("#direccionCorreo").value.trim();
+                const telefono = document.querySelector("#numeroTelefono").value.trim();
+                const ubicacion = document.querySelector("#ubicacion").value.trim();
+                const detalles = document.querySelector("#detallesProyecto").value.trim();
+                const presupuesto = document.querySelector("#presupuestoDisponible").value.trim();
+                const comentariosFinal = document.querySelector("#comentariosAdicionales").value.trim();
+                const comentarios = comentariosFinal === "" ? null : comentariosFinal;
+
+                if (filas_dataTable && filas_dataTable.length > 0) {
+                    const cancionesSeleccionadas = filas_dataTable.map(fila => ({
+                        nombreCancion: fila.cancion,
+                        entidad: fila.entidad,
+                    }));
+                    console.log("dentro de el : " + cancionesSeleccionadas);
+                }
+
+                //console.log("CancionesSeleccionadas : " + JSON.stringify(cancionesSeleccionadas, null, 2));
+
+                if (!empresa || !contacto || !correo || !telefono || !ubicacion || !detalles || !presupuesto) {
+                    const alertContainer = document.querySelector("#alertContainer");
+                    alertContainer.innerHTML = `<div
+                class="mb-3 inline-flex w-full items-center rounded-lg bg-danger-100 px-6 py-5 text-base text-danger-700"
+                role="alert">
+                <span class="mr-2">
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="h-5 w-5">
+                    <path
+                        fill-rule="evenodd"
+                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
+                        clip-rule="evenodd" />
+                    </svg>
+                </span>
+                Hay que completar todos los campos excepto el opcional.
+            </div>`;
+                    return;  // Termina la función si faltan campos
+                }
+
+                const idsCoincidentes = [];
+
+
+
+                if (filas_dataTable && filas_dataTable.length > 0) {
+                    const response = await axios.get('http://localhost:8000/api/editorial/canciones/');
+                    const canciones = response.data;
+                    await Promise.all(cancionesSeleccionadas.map(async (cancionSeleccionada) => {
+                        const cancionCoincidente = canciones.find(cancion =>
+                            cancionSeleccionada.nombreCancion === cancion.nombre);
+
+                        if (cancionCoincidente) {
+                            idsCoincidentes.push(cancionCoincidente.id);
+                        }
+                    }));
+                }
+
+                console.log("IDS : " + JSON.stringify(idsCoincidentes, null, 2));
+
 
                 const datosSolicitud = {
                     empresa,
@@ -373,17 +381,24 @@ export default {
                     ubicacion,
                     detalles,
                     presupuesto,
-                    comentarios
+                    comentarios,
                 };
 
-                const response = await axios.post(`http://localhost:8000/api/editorial/solicitudes/`, datosSolicitud);
+                // Agrega canciones solo si idsCoincidentes no está vacío
+                if (idsCoincidentes.length > 0) {
+                    datosSolicitud.canciones = idsCoincidentes;
+                }
 
-                console.log('Solicitud enviada:', response.data);
+                console.log("Datos de solicitud : " + JSON.stringify(datosSolicitud));
 
+                const responseSolicitud = await axios.post('http://localhost:8000/api/editorial/solicitudes/', datosSolicitud);
+                console.log('Solicitud enviada:', responseSolicitud.data);
 
             } catch (error) {
-                console.error('Error al modificar la canción:', error);
+                console.error('Error al enviar la solicitud:', error.response || error);
+                console.log('Detalles del error:', error.response.data);
             }
+
         },
 
 
@@ -512,11 +527,10 @@ export default {
                     await this.fetchEntidadName(cancion);
                     await this.fetchGeneroNames(cancion);
 
-                    const botonEscuchar = `<button class="btn-escuchar animate-fade-in" data-id="${cancion.idSpotify}" ></button>`;
-
-                    //const botonEscuchar = `<button class="btn-escuchar" data-id="${cancion.idSpotify}"> <img class="btn-image" src="public/images/boton-de-play.png" alt="Descripción de la imagen"></button>`;
+                    const botonEscuchar = `<button class="btn-escuchar animate-fade-in" data-id="${cancion.idSpotify}"></button>`;
 
                     return {
+                        id: cancion.id,
                         cancion: cancion.nombre,
                         artista: cancion.entidadNombre,
                         genero: cancion.generoNombres.join(', '),
@@ -539,6 +553,8 @@ export default {
                 };
 
                 this.initDataTable(data);
+
+
 
                 const tableContainer = document.getElementById('datatable');
                 tableContainer.addEventListener('click', (event) => {
