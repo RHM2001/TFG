@@ -661,11 +661,7 @@ export default {
         },
 
         async cambiarInfoModal(idCancion) {
-            console.log('Antes de vaciar:', this.cancionModal);
-            Object.keys(this.cancionModal).forEach(key => {
-                this.cancionModal[key] = '';
-            });
-            console.log('Después de vaciar:', this.cancionModal);
+
             try {
                 const response = await axios.get(`http://localhost:8000/api/editorial/canciones/${idCancion}`);
                 const cancion = response.data;
