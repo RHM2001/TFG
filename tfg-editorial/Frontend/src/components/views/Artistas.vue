@@ -95,7 +95,6 @@
     margin-bottom: 20px;
     margin-right: 20px;
     transition: transform 0.2s ease-in-out;
-
 }
 
 .block-artistas img {

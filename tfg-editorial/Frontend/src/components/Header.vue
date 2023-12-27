@@ -29,16 +29,15 @@
                     id="navbarSupportedContentX" data-te-collapse-item>
 
                     <router-link to="/" class="animate-fade-in mb-4 ml-2 mr-5 mt-3">
-                        <img src="../../public/images/logo-sonbuenos.png"
-                            style="max-width: 110px; height: auto;" alt="Logo SonBuenos" />
+                        <img src="../../public/images/logo-sonbuenos.png" style="max-width: 110px; height: auto;"
+                            alt="Logo SonBuenos" />
                     </router-link>
 
                     <ul class="mr-auto flex flex-col lg:flex-row lg:pl-16 " data-te-navbar-nav-ref>
                         <li class="mb-0 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                             <router-link to="/sincronizacion"
                                 class="block transition duration-150 ease-in-out hover:text-pink-600  focus:text-neutral-700 disabled:text-black/30 dark:hover:text-pink-600  lg:p-2 [&.active]:text-black/90"
-                                 data-te-nav-link-ref data-te-ripple-init
-                                data-te-ripple-color="light">Sincronización
+                                data-te-nav-link-ref data-te-ripple-init data-te-ripple-color="light">Sincronización
                             </router-link>
                         </li>
                         <li class="mb-0 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
@@ -50,13 +49,16 @@
                         </li>
 
                         <li class="mb-0 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                            <a class="block transition duration-150 ease-in-out hover:text-pink-600  focus:text-neutral-700 disabled:text-black/30 dark:hover:text-pink-600  lg:p-2 [&.active]:text-black/90"
-                                href="#!" data-te-nav-link-ref data-te-ripple-init
-                                data-te-ripple-color="light">Merchandising</a>
+                            <router-link to="/merchandising"
+                                class="block transition duration-150 ease-in-out hover:text-pink-600  focus:text-neutral-700 disabled:text-black/30 dark:hover:text-pink-600  lg:p-2 [&.active]:text-black/90"
+                                data-te-nav-link-ref data-te-ripple-init data-te-ripple-color="light">
+                                Merchandising
+                            </router-link>
                         </li>
-                       
+
                         <li class="mb-0 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                            <router-link to="/administrador" class="block transition duration-150 ease-in-out hover:text-pink-600  focus:text-neutral-700 disabled:text-black/30 dark:hover:text-pink-600  lg:p-2 [&.active]:text-black/90"
+                            <router-link to="/administrador"
+                                class="block transition duration-150 ease-in-out hover:text-pink-600  focus:text-neutral-700 disabled:text-black/30 dark:hover:text-pink-600  lg:p-2 [&.active]:text-black/90"
                                 href="#!" data-te-nav-link-ref data-te-ripple-init
                                 data-te-ripple-color="light">Administrador </router-link>
                         </li>
